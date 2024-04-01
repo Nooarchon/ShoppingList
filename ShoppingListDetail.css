@@ -1,0 +1,24 @@
+.shopping-list-container {
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: aqua;
+}
+
+h2 {
+  margin-bottom: 20px;
+  color: blue;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  color: blue;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+input[type="text"] {
+  padding: 5px;
+}
