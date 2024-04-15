@@ -1,0 +1,28 @@
+/* ShoppingListTile.css */
+.shopping-list-tile {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+  
+  .tile-link {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .tile-name {
+    margin-bottom: 8px;
+  }
+  
+  .tile-owner {
+    margin-bottom: 4px;
+    font-style: italic;
+  }
+  
+  .tile-members {
+    font-size: 0.9em;
+    color: #555;
+  }
+  
