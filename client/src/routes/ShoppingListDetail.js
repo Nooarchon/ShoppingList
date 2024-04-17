@@ -94,7 +94,7 @@ function ShoppingListDetail({ shoppingLists, updateShoppingList, user }) {
   };
 
   const toggleViewMode = () => {
-    setViewMode(viewMode === 'list' ? 'tiles' : 'list');
+    setViewMode(prevMode => prevMode === 'list' ? 'tiles' : 'list');
   };
 
   return (
@@ -117,9 +117,9 @@ function ShoppingListDetail({ shoppingLists, updateShoppingList, user }) {
       <>
         <h3>Members:</h3>
         <div className="filter-container">
-          <button onClick={toggleViewMode}>
-            {viewMode === 'list' ? 'Show Members as Tiles' : 'Show Members as List'}
-          </button>
+        <button onClick={toggleViewMode}>
+          {viewMode === 'list' ? 'Show them as Tiles' : 'Show them as List'}
+        </button>
         </div>
         {viewMode === 'tiles' ? (
           <div className="tile-container">
@@ -172,9 +172,6 @@ function ShoppingListDetail({ shoppingLists, updateShoppingList, user }) {
             onChange={handleFilterToggle}
           />
         </label>
-        <button onClick={toggleViewMode}>
-          {viewMode === 'list' ? 'Show Items as Tiles' : 'Show Items as List'}
-        </button>
       </div>
       {viewMode === 'tiles' ? (
         <div className="tile-container">

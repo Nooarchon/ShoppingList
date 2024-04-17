@@ -1,7 +1,7 @@
 // CreateShoppingList.js
 
 import React, { useState } from 'react';
-import './Modal.css';
+import './modal.css';
 import Modal from './Modal';
 import addIcon from '../images/add_icon.png';
 import backIcon from '../images/back_icon.png';

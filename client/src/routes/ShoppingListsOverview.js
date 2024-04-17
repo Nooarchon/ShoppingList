@@ -5,6 +5,7 @@ import removeIcon from '../images/remove_icon.png';
 import logoutIcon from '../images/logout_icon.png';
 import archiveIcon from '../images/archive_icon.png';
 import ShoppingListTile from '../utils/ShoppingListTile';
+import Modal from '../modules/Modal'; // Import the Modal component here
 
 function ShoppingListsOverview({ shoppingLists, setShoppingLists, removeShoppingList, user, setUser, updateShoppingList }) {
   const [newListName, setNewListName] = useState('');
@@ -14,6 +15,7 @@ function ShoppingListsOverview({ shoppingLists, setShoppingLists, removeShopping
   const [password, setPassword] = useState('');
   const [showArchived, setShowArchived] = useState(false);
   const [viewMode, setViewMode] = useState('list'); // 'list' or 'tiles'
+  const [showModal, setShowModal] = useState(false); // State to control the visibility of the modal
 
   const handleInputChange = (e) => {
     setNewListName(e.target.value);
@@ -39,6 +41,7 @@ function ShoppingListsOverview({ shoppingLists, setShoppingLists, removeShopping
     };
     setShoppingLists([...shoppingLists, newList]);
     setNewListName('');
+    setShowModal(false); // Close the modal after adding a new shopping list
   };
 
   const handleLogin = () => {
@@ -117,7 +120,7 @@ function ShoppingListsOverview({ shoppingLists, setShoppingLists, removeShopping
               <ShoppingListTile
                 key={list.id}
                 item={list}
-                onArchive={() => handleArchiveList(list.id)}
+                onArchive={() => (user ? handleArchiveList(list.id) : null)}
                 onRemove={() => handleRemoveList(list.id)}
                 isOwner={user && list.owner === user.username}
               />
@@ -135,25 +138,24 @@ function ShoppingListsOverview({ shoppingLists, setShoppingLists, removeShopping
                     <img src={removeIcon} alt="Remove Shopping List" width="20" height="20" />
                   </button>
                 )}
-                <button onClick={() => handleArchiveList(list.id)}>
-                  <img src={archiveIcon} alt="Archive List" width="20" height="20" />
-                </button>
+                {user && (
+                  <button onClick={() => handleArchiveList(list.id)}>
+                    <img src={archiveIcon} alt="Archive List" width="20" height="20" />
+                  </button>
+                )}
               </li>
             )
           ))}
         </ul>
       )}
       <div>
-        <input
-          type="text"
-          placeholder="Enter shopping list name"
-          value={newListName}
-          onChange={handleInputChange}
-        />
+
         <div style={{ textAlign: 'center' }}>
-          <button onClick={addNewShoppingList}>
-            <img src={addIcon} alt="Create New Shopping List" width="20" height="20" />
-          </button>
+          <div>
+            <button onClick={() => setShowModal(true)}>
+              <img src={addIcon} alt="Create New Shopping List" width="20" height="20" />
+            </button>
+          </div>
         </div>
 
         {error && <p style={{ color: 'red' }}>{error}</p>}
@@ -178,8 +180,28 @@ function ShoppingListsOverview({ shoppingLists, setShoppingLists, removeShopping
           </form>
         </div>
       )}
+      {showModal && (
+        <Modal onClose={() => setShowModal(false)}>
+          <div>
+            <h3>Create New Shopping List</h3>
+            <input
+              type="text"
+              placeholder="Enter shopping list name"
+              value={newListName}
+              onChange={handleInputChange}
+            />
+            {error && <p style={{ color: 'red' }}>{error}</p>}
+            <div style={{ textAlign: 'center' }}>
+              <button onClick={addNewShoppingList} style={{ border: 'none', backgroundColor: 'transparent' }}>
+                <img src={addIcon} alt="Create New Shopping List" width="20" height="20" />
+              </button>
+            </div>
+          </div>
+        </Modal>
+      )}
     </div>
   );
+
 }
 
 export default ShoppingListsOverview;
