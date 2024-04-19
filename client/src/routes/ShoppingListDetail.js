@@ -113,55 +113,41 @@ function ShoppingListDetail({ shoppingLists, updateShoppingList, user }) {
         )}
       </h2>
       <p>Owner: {shoppingList.owner}</p>
-    
-      <>
-        <h3>Members:</h3>
-        <div className="filter-container">
-        <button onClick={toggleViewMode}>
-          {viewMode === 'list' ? 'Show them as Tiles' : 'Show them as List'}
-        </button>
-        </div>
-        {viewMode === 'tiles' ? (
-          <div className="tile-container">
-            {shoppingList.members.map(member => (
-              <ShoppingListTile key={member} item={{ name: member }} />
-            ))}
-          </div>
-        ) : (
-          <ul>
-            {shoppingList.members.map(member => (
-              <li key={member}>
-                {member}
-                {user.username === shoppingList.owner && member !== shoppingList.owner && (
-                  <button onClick={() => handleMemberRemove(member)}>
-                    <img src={removeIcon} alt="Remove Member" width="20" height="20" />
-                  </button>
-                )}
-              </li>
-            ))}
-            {user.username !== shoppingList.owner && (
-              <li>
-                <button onClick={handleLeaveList}>
-                  Leave List
-                </button>
-              </li>
+  
+      <h3>Members:</h3>
+      <ul>
+        {shoppingList.members.map(member => (
+          <li key={member}>
+            {member}
+            {user.username === shoppingList.owner && member !== shoppingList.owner && (
+              <button onClick={() => handleMemberRemove(member)}>
+                <img src={removeIcon} alt="Remove Member" width="20" height="20" />
+              </button>
             )}
-            {user.username === shoppingList.owner && (
-              <li>
-                <input
-                  type="text"
-                  value={newMember}
-                  onChange={(e) => setNewMember(e.target.value)}
-                  placeholder="Enter new member name"
-                />
-                <button onClick={handleMemberAdd}>
-                  <img src={addIcon} alt="Add Member" width="20" height="20" />
-                </button>
-              </li>
-            )}
-          </ul>
+          </li>
+        ))}
+        {user.username !== shoppingList.owner && (
+          <li>
+            <button onClick={handleLeaveList}>
+              Leave List
+            </button>
+          </li>
         )}
-      </>
+        {user.username === shoppingList.owner && (
+          <li>
+            <input
+              type="text"
+              value={newMember}
+              onChange={(e) => setNewMember(e.target.value)}
+              placeholder="Enter new member name"
+            />
+            <button onClick={handleMemberAdd}>
+              <img src={addIcon} alt="Add Member" width="20" height="20" />
+            </button>
+          </li>
+        )}
+      </ul>
+  
       <h3>Items:</h3>
       <div className="filter-container">
         <label>
@@ -172,6 +158,9 @@ function ShoppingListDetail({ shoppingLists, updateShoppingList, user }) {
             onChange={handleFilterToggle}
           />
         </label>
+        <button onClick={toggleViewMode}>
+          {viewMode === 'list' ? 'Show as Tiles' : 'Show as List'}
+        </button>
       </div>
       {viewMode === 'tiles' ? (
         <div className="tile-container">
@@ -226,12 +215,13 @@ function ShoppingListDetail({ shoppingLists, updateShoppingList, user }) {
           </ul>
         </div>
       )}
-     
+  
       <Link to="/" className="back-link">
         <img src={backIcon} alt="Back to Shopping Lists Overview" width="20" height="20" />
       </Link>
     </div>
   );
+  
 }
 
 export default ShoppingListDetail;
