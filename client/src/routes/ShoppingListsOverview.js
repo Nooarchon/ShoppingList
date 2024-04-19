@@ -5,7 +5,8 @@ import removeIcon from '../images/remove_icon.png';
 import logoutIcon from '../images/logout_icon.png';
 import archiveIcon from '../images/archive_icon.png';
 import ShoppingListTile from '../utils/ShoppingListTile';
-import Modal from '../modules/Modal'; // Import the Modal component here
+import Modal from '../modules/Modal';
+import DeleteConfirmationDialog from './DeleteConfirmationDialog'; // Import the DeleteConfirmationDialog component here
 
 function ShoppingListsOverview({ shoppingLists, setShoppingLists, removeShoppingList, user, setUser, updateShoppingList }) {
   const [newListName, setNewListName] = useState('');
@@ -15,7 +16,9 @@ function ShoppingListsOverview({ shoppingLists, setShoppingLists, removeShopping
   const [password, setPassword] = useState('');
   const [showArchived, setShowArchived] = useState(false);
   const [viewMode, setViewMode] = useState('list'); // 'list' or 'tiles'
-  const [showModal, setShowModal] = useState(false); // State to control the visibility of the modal
+  const [showModal, setShowModal] = useState(false);
+  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false); // State to control the visibility of the delete confirmation dialog
+  const [deleteListId, setDeleteListId] = useState(null); // State to store the ID of the list to be deleted
 
   const handleInputChange = (e) => {
     setNewListName(e.target.value);
@@ -41,7 +44,7 @@ function ShoppingListsOverview({ shoppingLists, setShoppingLists, removeShopping
     };
     setShoppingLists([...shoppingLists, newList]);
     setNewListName('');
-    setShowModal(false); // Close the modal after adding a new shopping list
+    setShowModal(false);
   };
 
   const handleLogin = () => {
@@ -74,13 +77,20 @@ function ShoppingListsOverview({ shoppingLists, setShoppingLists, removeShopping
   };
 
   const handleRemoveList = (listId) => {
-    if (window.confirm('Are you sure you want to remove this shopping list?')) {
-      setShoppingLists(shoppingLists.filter(list => list.id !== listId));
-    }
+    // Display the delete confirmation dialog
+    setDeleteListId(listId);
+    setShowDeleteConfirmation(true);
   };
 
   const handleToggleViewMode = () => {
     setViewMode(viewMode === 'list' ? 'tiles' : 'list');
+  };
+
+  const confirmDeleteList = () => {
+    // Remove the list from the state
+    setShoppingLists(shoppingLists.filter(list => list.id !== deleteListId));
+    // Close the delete confirmation dialog
+    setShowDeleteConfirmation(false);
   };
 
   return (
@@ -149,7 +159,6 @@ function ShoppingListsOverview({ shoppingLists, setShoppingLists, removeShopping
         </ul>
       )}
       <div>
-
         <div style={{ textAlign: 'center' }}>
           <div>
             <button onClick={() => setShowModal(true)}>
@@ -157,7 +166,6 @@ function ShoppingListsOverview({ shoppingLists, setShoppingLists, removeShopping
             </button>
           </div>
         </div>
-
         {error && <p style={{ color: 'red' }}>{error}</p>}
       </div>
       {showLoginModal && (
@@ -199,9 +207,15 @@ function ShoppingListsOverview({ shoppingLists, setShoppingLists, removeShopping
           </div>
         </Modal>
       )}
+      {/* Render the DeleteConfirmationDialog if showDeleteConfirmation is true */}
+      {showDeleteConfirmation && (
+        <DeleteConfirmationDialog
+          onDelete={confirmDeleteList}
+          onClose={() => setShowDeleteConfirmation(false)}
+        />
+      )}
     </div>
   );
-
 }
 
 export default ShoppingListsOverview;

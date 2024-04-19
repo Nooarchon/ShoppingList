@@ -1,4 +1,5 @@
-const mongoose = require('mongoose'); // Import Mongoose
+const mongoose = require('mongoose');
+
 
 /******************************************************************************************************/
 
@@ -38,10 +39,8 @@ const shoppingListSchema = new mongoose.Schema({
         }],
         required: false
     },
-})
+});
 
 const ShoppingList = mongoose.model('ShoppingList', shoppingListSchema);
-
-/******************************************************************************************************/
 
 module.exports = ShoppingList;

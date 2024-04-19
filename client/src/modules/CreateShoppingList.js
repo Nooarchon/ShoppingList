@@ -2,11 +2,10 @@
 
 import React, { useState } from 'react';
 import './modal.css';
-import Modal from './Modal';
 import addIcon from '../images/add_icon.png';
 import backIcon from '../images/back_icon.png';
 
-function CreateShoppingList({ addNewShoppingList, user }) {
+function CreateShoppingList({ addNewShoppingList, user, Modal }) {
   const [showModal, setShowModal] = useState(false);
   const [newListName, setNewListName] = useState('');
   const [error, setError] = useState('');

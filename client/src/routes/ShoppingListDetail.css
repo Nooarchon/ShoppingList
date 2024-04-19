@@ -1,24 +1,30 @@
+/* Shopping List Detail */
 .shopping-list-container {
-  max-width: 600px;
-  margin: 0 auto;
+  max-width: 800px;
+  margin: 100px auto;
+  padding: 20px;
   background-color: aqua;
 }
 
-h2 {
+.shopping-list-container h2 {
   margin-bottom: 20px;
   color: blue;
 }
 
-ul {
+.shopping-list-container ul {
   list-style-type: none;
   padding: 0;
   color: blue;
 }
 
-li {
+.shopping-list-container li {
   margin-bottom: 10px;
 }
 
-input[type="text"] {
-  padding: 5px;
+.shopping-list-container input[type="text"] {
+  padding: 10px;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
 }

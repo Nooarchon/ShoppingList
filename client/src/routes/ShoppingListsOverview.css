@@ -1,0 +1,31 @@
+/* Shopping Lists Overview */
+.shopping-lists-container {
+  max-width: 800px;
+  margin: 100px auto;
+  padding: 20px;
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+}
+
+.shopping-lists-container h2 {
+  margin-bottom: 20px;
+  color: #333333;
+}
+
+.shopping-lists-container ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.shopping-lists-container li {
+  margin-bottom: 10px;
+}
+
+.shopping-lists-container input[type="text"] {
+  padding: 10px;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
+}
