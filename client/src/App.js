@@ -35,14 +35,13 @@ function App() {
 
   const updateShoppingList = async (updatedList) => {
     try {
-      const response = await updateData(`/api/shopping-lists/${updatedList.id}`, updatedList); // Update shopping list on the server
+      const response = await updateData(updatedList.id, updatedList); // Update shopping list on the server
       const updatedLists = shoppingLists.map(list => (list.id === updatedList.id ? response : list));
       setShoppingLists(updatedLists); // Update state with the updated list returned from the server
     } catch (error) {
       console.error('Failed to update shopping list:', error.message);
     }
   };
-  
 
   const removeShoppingList = async (id) => {
     try {

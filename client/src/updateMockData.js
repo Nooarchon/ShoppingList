@@ -1,28 +1,19 @@
 // updateMockData.js
+
 import { mockShoppingLists } from './mockData';
 
-// Function to update shopping list properties
+// Mock function for updating data
 export const updateMockData = async (id, data) => {
   try {
-    // Find the index of the shopping list in the mock data array
-    const index = mockShoppingLists.findIndex(list => list.id === id);
-
-    // If the list is found, update its properties
+    const index = mockShoppingLists.findIndex((item) => item.id === id);
     if (index !== -1) {
-      // Update shopping list properties based on the data provided
-      const updatedList = { ...mockShoppingLists[index], ...data };
-
-      // Update shopping list properties
-      mockShoppingLists[index] = updatedList;
-      
-      return updatedList;
+      mockShoppingLists[index] = data; // Update the list with the new data
+      return data;
     } else {
-      throw new Error('List not found');
+      throw new Error('List not found'); // Throw an error if the list is not found
     }
   } catch (error) {
     console.error('Failed to update data:', error);
     throw new Error('Failed to update data');
   }
 };
-
-

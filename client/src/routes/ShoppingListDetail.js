@@ -27,6 +27,7 @@ function ShoppingListDetail({ shoppingLists, updateShoppingList, user }) {
 
   const handleNameChange = (e) => {
     if (user.username === shoppingList.owner) {
+      console.log('Edited Name:', e.target.value);
       setEditedName(e.target.value);
     }
   };
@@ -36,21 +37,21 @@ function ShoppingListDetail({ shoppingLists, updateShoppingList, user }) {
       alert('Please enter a valid member name containing only letters.');
       return;
     }
+    console.log('New Member:', newMember);
     const updatedMembers = [...shoppingList.members, newMember];
     updateShoppingList({ ...shoppingList, members: updatedMembers });
     setNewMember('');
   };
-  
   
   const handleMemberRemove = (member) => {
     if (member === shoppingList.owner) {
       alert("The owner cannot be removed from the list.");
       return;
     }
-  
     if (user.username === shoppingList.owner) {
+      console.log('Removed Member:', member);
       const updatedMembers = shoppingList.members.filter(m => m !== member);
-      updateShoppingList({ ...shoppingList, members: updatedMembers });
+       updateShoppingList({ ...shoppingList, members: updatedMembers });
     } else {
       alert("You don't have permission to remove members.");
     }
@@ -61,7 +62,7 @@ function ShoppingListDetail({ shoppingLists, updateShoppingList, user }) {
       alert("As the owner, you cannot leave the list.");
       return;
     }
-  
+    console.log('Left List');
     const updatedMembers = shoppingList.members.filter(member => member !== user.username);
     updateShoppingList({ ...shoppingList, members: updatedMembers });
   };
@@ -71,6 +72,7 @@ function ShoppingListDetail({ shoppingLists, updateShoppingList, user }) {
       alert('Please enter a valid item name containing only letters.');
       return;
     }
+    console.log('New Item:', newItemName);
     const newItem = { id: Date.now(), name: newItemName, resolved: false };
     const updatedItems = [...shoppingList.items, newItem];
     updateShoppingList({ ...shoppingList, items: updatedItems });
@@ -78,17 +80,20 @@ function ShoppingListDetail({ shoppingLists, updateShoppingList, user }) {
   };
   
   const handleItemRemove = (itemId) => {
+    console.log('Removed Item ID:', itemId);
     const updatedItems = shoppingList.items.filter(item => item.id !== itemId);
     updateShoppingList({ ...shoppingList, items: updatedItems });
   };
 
   const handleItemResolve = (itemId) => {
+    console.log('Item ID:', itemId);
     const updatedItems = shoppingList.items.map(item =>
       item.id === itemId ? { ...item, resolved: true } : item
     );
+    console.log('Updated Items:', updatedItems);
     updateShoppingList({ ...shoppingList, items: updatedItems });
   };
-
+  
   const handleFilterToggle = () => {
     setFilterResolved(!filterResolved);
   };
@@ -221,7 +226,6 @@ function ShoppingListDetail({ shoppingLists, updateShoppingList, user }) {
       </Link>
     </div>
   );
-  
 }
 
 export default ShoppingListDetail;

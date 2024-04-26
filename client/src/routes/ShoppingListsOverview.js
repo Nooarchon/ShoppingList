@@ -21,6 +21,7 @@ function ShoppingListsOverview({ shoppingLists, setShoppingLists, removeShopping
   const [deleteListId, setDeleteListId] = useState(null); // State to store the ID of the list to be deleted
 
   const handleInputChange = (e) => {
+    console.log('New List Name:', e.target.value);
     setNewListName(e.target.value);
     setError('');
   };
@@ -34,6 +35,7 @@ function ShoppingListsOverview({ shoppingLists, setShoppingLists, removeShopping
       setError('Please enter a valid shopping list name.');
       return;
     }
+    console.log('New Shopping List Name:', newListName);
     const newList = {
       id: Date.now(),
       name: newListName,
@@ -54,6 +56,7 @@ function ShoppingListsOverview({ shoppingLists, setShoppingLists, removeShopping
   const handleLoginSubmit = (e) => {
     e.preventDefault();
     // Perform authentication logic here
+    console.log('Login Submit:', username, password);
     const authenticatedUser = {
       username: username,
       email: 'example@example.com' // Assuming a default email for demonstration
@@ -65,10 +68,12 @@ function ShoppingListsOverview({ shoppingLists, setShoppingLists, removeShopping
   };
 
   const handleLeaveApp = () => {
+    console.log('Leaving App');
     setUser(null);
   };
 
   const handleArchiveList = (listId) => {
+    console.log('Archiving List ID:', listId);
     const updatedList = shoppingLists.find(list => list.id === listId);
     if (!updatedList || updatedList.owner !== user.username) {
       return;
@@ -77,16 +82,19 @@ function ShoppingListsOverview({ shoppingLists, setShoppingLists, removeShopping
   };
 
   const handleRemoveList = (listId) => {
+    console.log('Removing List ID:', listId);
     // Display the delete confirmation dialog
     setDeleteListId(listId);
     setShowDeleteConfirmation(true);
   };
 
   const handleToggleViewMode = () => {
+    console.log('Toggling View Mode');
     setViewMode(viewMode === 'list' ? 'tiles' : 'list');
   };
 
   const confirmDeleteList = () => {
+    console.log('Confirming Delete List:', deleteListId);
     // Remove the list from the state
     setShoppingLists(shoppingLists.filter(list => list.id !== deleteListId));
     // Close the delete confirmation dialog

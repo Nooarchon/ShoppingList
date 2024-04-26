@@ -1,9 +1,9 @@
-import {
-  getData as getMockData,
-  postData as postMockData,
-  deleteData as deleteMockData,
-  updateData as updateMockData,
-} from './mockData';
+import { 
+  getData as getMockData, 
+  postData as postMockData, 
+  deleteData as deleteMockData, 
+  updateData as updateMockData } from './mockData';
+
 
 // Function to make GET request
 export const getData = async (url) => {
@@ -42,7 +42,7 @@ export const deleteData = async (url, id) => {
 };
 
 // Function to make PUT request
-export const updateData = async (url, id, data) => {
+export const updateData = async (id, data) => {
   try {
     // Call your mock data function for updating data
     const response = await updateMockData(id, data);
