@@ -72,13 +72,15 @@ function ShoppingListsOverview({ shoppingLists, setShoppingLists, removeShopping
     setUser(null);
   };
 
-  const handleArchiveList = (listId) => {
-    console.log('Archiving List ID:', listId);
-    const updatedList = shoppingLists.find(list => list.id === listId);
-    if (!updatedList || updatedList.owner !== user.username) {
-      return;
+  const handleArchiveList = async (id) => {
+    try {
+      // Set archived to true for the list with the given ID
+      const updatedList = { ...shoppingLists.find(list => list.id === id), archived: true };
+      await updateShoppingList(updatedList); // Update the list on the server
+      console.log('Archiving List ID:', id);
+    } catch (error) {
+      console.error('Failed to archive shopping list:', error.message);
     }
-    updateShoppingList({ ...updatedList, archived: true });
   };
 
   const handleRemoveList = (listId) => {
