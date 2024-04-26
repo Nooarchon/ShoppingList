@@ -1,61 +1,57 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { getData, postData, deleteData, updateData } from './Call'; // Import the HTTP request functions
 import CreateShoppingList from './modules/CreateShoppingList';
 import ShoppingListsOverview from './routes/ShoppingListsOverview';
 import ShoppingListDetail from './routes/ShoppingListDetail';
 import './App.css';
 
 function App() {
-  const [shoppingLists, setShoppingLists] = useState([
-    {
-      id: 1,
-      name: 'Food',
-      owner: 'John',
-      members: ['John', 'Alice', 'Bob'],
-      items: [
-        { id: 1, name: 'Apples', resolved: false },
-        { id: 2, name: 'Bananas', resolved: true },
-        { id: 3, name: 'Milk', resolved: false }
-      ],
-      archived: false
-    },
-    {
-      id: 2,
-      name: 'Book',
-      owner: 'Alice',
-      members: ['Alice', 'Bob', 'John'],
-      items: [
-        { id: 1, name: 'Harry Potter', resolved: true },
-        { id: 2, name: 'Lord of the Rings', resolved: false }
-      ],
-      archived: false
-    }
-  ]);
-
+  const [shoppingLists, setShoppingLists] = useState([]);
   const [user, setUser] = useState(null);
 
-  // Define the list of users
-  const USERS = [
-    { id: "123", name: "James" },
-    { id: "234", name: "Amelia" },
-    { id: "345", name: "John" },
-    { id: "456", name: "Chloe" }
-  ];
+  useEffect(() => {
+    // Fetch initial data when component mounts
+    fetchData();
+  }, []); // Empty dependency array ensures this effect runs only once on mount
 
-  const addNewShoppingList = (newList) => {
-    setShoppingLists([...shoppingLists, newList]);
+  const fetchData = async () => {
+    try {
+      const data = await getData('/api/shopping-lists'); // Fetch shopping lists from the server
+      setShoppingLists(data); // Update state with fetched data
+    } catch (error) {
+      console.error('Failed to fetch data:', error.message);
+    }
   };
 
-  const updateShoppingList = (updatedList) => {
-    const updatedLists = shoppingLists.map(list =>
-      list.id === updatedList.id ? updatedList : list
-    );
-    setShoppingLists(updatedLists);
+  const addNewShoppingList = async (newList) => {
+    try {
+      const response = await postData('/api/shopping-lists', newList); // Post new shopping list to the server
+      setShoppingLists([...shoppingLists, response]); // Update state with the new list returned from the server
+    } catch (error) {
+      console.error('Failed to add new shopping list:', error.message);
+    }
   };
 
-  const removeShoppingList = (id) => {
-    const updatedLists = shoppingLists.filter(list => list.id !== id);
-    setShoppingLists(updatedLists);
+  const updateShoppingList = async (updatedList) => {
+    try {
+      const response = await updateData(`/api/shopping-lists/${updatedList.id}`, updatedList); // Update shopping list on the server
+      const updatedLists = shoppingLists.map(list => (list.id === updatedList.id ? response : list));
+      setShoppingLists(updatedLists); // Update state with the updated list returned from the server
+    } catch (error) {
+      console.error('Failed to update shopping list:', error.message);
+    }
+  };
+  
+
+  const removeShoppingList = async (id) => {
+    try {
+      await deleteData(`/api/shopping-lists/${id}`); // Delete shopping list from the server
+      const updatedLists = shoppingLists.filter(list => list.id !== id);
+      setShoppingLists(updatedLists); // Update state by removing the deleted list
+    } catch (error) {
+      console.error('Failed to remove shopping list:', error.message);
+    }
   };
 
   return (
@@ -64,7 +60,14 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={<ShoppingListsOverview shoppingLists={shoppingLists} setShoppingLists={setShoppingLists} removeShoppingList={removeShoppingList} user={user} setUser={setUser} updateShoppingList={updateShoppingList} users={USERS} />}
+            element={<ShoppingListsOverview
+              shoppingLists={shoppingLists}
+              setShoppingLists={setShoppingLists}
+              removeShoppingList={removeShoppingList}
+              user={user}
+              setUser={setUser}
+              updateShoppingList={updateShoppingList}
+            />}
           />
           <Route
             path="/create-shopping-list"
@@ -72,7 +75,12 @@ function App() {
           />
           <Route
             path="/shopping-list/:id"
-            element={<ShoppingListDetail shoppingLists={shoppingLists} updateShoppingList={updateShoppingList} user={user} setUser={setUser} users={USERS} />} // Pass setUser as a prop
+            element={<ShoppingListDetail
+              shoppingLists={shoppingLists}
+              updateShoppingList={updateShoppingList}
+              user={user}
+              setUser={setUser}
+            />}
           />
         </Routes>
       </Router>

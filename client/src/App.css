@@ -51,24 +51,18 @@ button {
   cursor: pointer;
   border-radius: 4px;
   transition: background-color 0.3s ease;
-  margin: 10px;
-  /* Apply margin to all buttons */
+  margin: 10px; /* Apply margin to all buttons */
 }
 
 button.centered {
-  margin: 10px auto;
-  /* Center the create button horizontally */
-  display: block;
-  /* Ensure the create button is on a new line */
+  margin: 10px auto; /* Center the create button horizontally */
+  display: block; /* Ensure the create button is on a new line */
 }
 
 button:hover {
   background-color: #007bff;
   border-color: #0056b3;
 }
-
-
-
 
 /* Modal styles */
 .modal {

@@ -142,7 +142,10 @@ function ShoppingListsOverview({ shoppingLists, setShoppingLists, removeShopping
           {shoppingLists.map(list => (
             (showArchived || !list.archived) && (
               <li key={list.id}>
-                <Link to={`/shopping-list/${list.id}`}>{list.name}</Link>
+                {list && (
+                  <Link to={`/shopping-list/${list.id}`}>{list.name}</Link>
+                )}
+
                 {user && list.owner === user.username && (
                   <button onClick={() => handleRemoveList(list.id)}>
                     <img src={removeIcon} alt="Remove Shopping List" width="20" height="20" />

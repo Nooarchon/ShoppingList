@@ -24,31 +24,37 @@ const createShoppingList = async (request, response) => {
 /*******************************************************************************************/
 
 const getShoppingList = async (request, response) => {
+
+    // Retrieving a specific shopping list from a database
+    
     try {
-        const shoppingListId = request.params.id;
-        const shoppingList = await ShoppingList.findById(shoppingListId);
-        
-        if (shoppingList) {
+
+        // Declaration of the auxiliary variable into which I get the Shopping list
+        const shoppingList = await ShoppingList.findById(request.params.id);
+
+        if (shoppingList){
             response.status(200).json({     
                 result: "Success!",
                 method: request.method,
                 data: shoppingList
             });
-        } else {
+        }
+
+        else {
             response.status(404).json({     
                 result: "Unsuccess!",
                 method: request.method,
-                message: "Shopping list not found!"
+                message: "Asked Shopping list was not found!"
             });
         }
-    } catch (error) {
-        response.status(500).json({
-            result: "Unsuccess!",
-            message: error.message
-        });
+    
+        } catch (error) {
+            response.status(400).json({
+                result: "Unsuccess!",
+                message: error
+            })
+        }
     }
-};
-
 
 /*******************************************************************************************/
 
