@@ -1,0 +1,162 @@
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.dark-mode {
+  background-color: #222;
+  color: #fff;
+}
+
+.light-mode {
+  background-color: #fff;
+  color: #222;
+}
+
+/* Container Styles */
+.app-container {
+  height: 100vh; /* Use viewport height */
+}
+
+.shopping-lists-container {
+  max-width: 800px; /* Adjusted max-width */
+  margin: 50px auto; /* Reduced margin */
+  padding: 30px;
+  background-color: #f9f9f9; /* Slightly lighter background */
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+}
+
+/* Heading Styles */
+h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #333;
+  font-weight: bold; /* Added font weight */
+}
+
+/* List Styles */
+ul {
+  padding: 0;
+}
+
+li {
+  margin-bottom: 15px; /* Increased margin */
+  display: flex;
+  align-items: center; /* Align items vertically */
+}
+
+li button {
+  margin-left: auto; /* Push buttons to the right */
+}
+
+
+/* Input Styles */
+input[type="text"], input[type="password"] {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  width: calc(100% - 24px); /* Adjusted width */
+  box-sizing: border-box;
+}
+
+/* Button Styles */
+button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+}
+
+button.centered {
+  margin: 20px auto; /* Increased margin */
+  display: block;
+}
+
+button:hover {
+  background-color: #0056b3; /* Darker hover color */
+}
+
+/* Modal Styles */
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Slightly darker shadow */
+}
+
+/* Dialog Modal */
+.dialog-modal {
+  z-index: 1000;
+}
+
+/* Button Container */
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+/* Shopping List Details */
+.shopping-list-container {
+  padding: 0 20px; /* Added padding */
+}
+
+.shopping-list-container button {
+  margin-top: 20px; /* Add margin between buttons and other elements */
+}
+
+/* Modal Container */
+.modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Modal Background */
+.modal-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+/* Modal Dialog */
+.modal-dialog {
+  position: relative;
+  z-index: 1000;
+}
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Close Button */
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}

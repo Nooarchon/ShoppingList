@@ -7,6 +7,7 @@ import CreateShoppingList from './modules/CreateShoppingList';
 import ShoppingListsOverview from './routes/ShoppingListsOverview';
 import ShoppingListDetail from './routes/ShoppingListDetail';
 import './App.css';
+import styles from "./styles/styles.css";
 
 function App() {
   const [shoppingLists, setShoppingLists] = useState([]);
@@ -56,7 +57,7 @@ function App() {
   };
 
   return (
-    <div className="app-container">
+   <div className={`app-container ${styles.appContainer}`}>
       <Router>
         <Routes>
           <Route
