@@ -3,16 +3,15 @@
   height: 100vh; /* Use viewport height */
 }
 
-
 .mode-toggle {
   /* Styles for the mode toggle button */
-  padding: 10px 20px;
+  padding: 8px 16px; /* Reduced padding */
   background-color: #007bff;
   color: #ffffff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  margin-bottom: 20px;
+  margin-bottom: 16px; /* Reduced margin */
 }
 
 .list-item {
@@ -23,23 +22,24 @@
 
 .action-buttons {
   display: flex;
-  gap: 10px; /* Adjust the gap as needed */
+  gap: 8px; /* Reduced gap */
 }
-
 
 .mode-toggle:hover {
   background-color: #0056b3;
 }
+
 /* Heading styles */
 h2 {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 16px; /* Reduced margin */
 }
+
 /* Shopping List Styles */
 .shopping-list-container {
   max-width: 1000px;
-  margin: 20px auto; /* Adjusted margin */
-  padding: 20px;
+  margin: 16px auto; /* Adjusted margin */
+  padding: 16px;
   border-radius: 8px;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
   color: #ffffff; /* Dark mode text color */
@@ -53,12 +53,20 @@ ul {
 }
 
 li {
-  margin-bottom: 10px; /* Reduced margin */
+  margin-bottom: 8px; /* Reduced margin */
 }
-
 
 li button {
   margin-left: auto; /* Push buttons to the right */
+}
+
+/* Adjust spacing between elements */
+.list-item {
+  margin-top: 10px; /* Reduce margin between list items */
+}
+
+.action-buttons button {
+  margin-left: 10px; /* Adjust margin between action buttons */
 }
 
 .checkbox-container {
@@ -67,14 +75,18 @@ li button {
   justify-content: center; /* Center items horizontally */
 }
 
+.button-container button {
+  margin-right: 10px; /* Adjust margin between buttons in the button container */
+}
+
 
 /* Input Styles */
 input[type="text"],
 input[type="password"] {
-  padding: 12px;
+  padding: 10px; /* Adjusted padding */
   border: 1px solid #ddd;
   border-radius: 6px;
-  width: calc(80% - 24px); /* Adjusted width */
+  width: 500px; /* Adjusted width */
   box-sizing: border-box;
   text-align: center; /* Center the text horizontally */
 }
@@ -84,27 +96,28 @@ button {
   background-color: #007bff;
   color: #fff;
   border: none;
-  padding: 12px 24px;
+  padding: 10px 20px; /* Adjusted padding */
   cursor: pointer;
   border-radius: 6px;
   transition: background-color 0.3s ease;
 }
 
 button.centered {
-  margin: 20px auto; /* Center buttons */
+  margin: 16px auto; /* Center buttons */
   display: block;
 }
+
 /* Button Container */
 .button-container {
   display: flex;
   justify-content: center;
-  gap: 15px;
+  gap: 12px; /* Reduced gap */
 }
 
 .back-link {
   background-color: #0056b3;
   color: #ffffff;
-  padding: 10px 20px;
+  padding: 8px 16px; /* Reduced padding */
   border-radius: 4px;
   text-decoration: none;
   transition: background-color 0.3s ease;

@@ -5,6 +5,7 @@ import removeIcon from '../images/remove_icon.png';
 import addIcon from '../images/add_icon.png';
 import backIcon from '../images/back_icon.png';
 import ShoppingListTile from '../utils/ShoppingListTile';
+import { useTranslation } from 'react-i18next'; // Import useTranslation hook
 
 function ShoppingListDetail({ shoppingLists, updateShoppingList, user }) {
   const { id } = useParams();
@@ -13,6 +14,7 @@ function ShoppingListDetail({ shoppingLists, updateShoppingList, user }) {
   const [newItemName, setNewItemName] = useState('');
   const [filterResolved, setFilterResolved] = useState(false);
   const [viewMode, setViewMode] = useState('list'); // 'list' or 'tiles'
+  const { t } = useTranslation();
 
   const shoppingList = shoppingLists.find(list => list.id === parseInt(id));
 
