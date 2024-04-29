@@ -103,7 +103,7 @@ function ShoppingListDetail({ shoppingLists, updateShoppingList, user }) {
   };
 
   return (
-    <div className="shopping-list-container">
+    <div>
       <h2>
         {user.username === shoppingList.owner ? (
           <input
@@ -153,20 +153,22 @@ function ShoppingListDetail({ shoppingLists, updateShoppingList, user }) {
         )}
       </ul>
   
-      <h3>Items:</h3>
-      <div className="filter-container">
-        <label>
-          Filter Resolved Items
-          <input
-            type="checkbox"
-            checked={filterResolved}
-            onChange={handleFilterToggle}
-          />
-        </label>
-        <button onClick={toggleViewMode}>
-          {viewMode === 'list' ? 'Show as Tiles' : 'Show as List'}
-        </button>
-      </div>
+      <h3>Items:</h3><div className="filter-container">
+  <div className="checkbox-container"> {/* Wrap checkbox inside a div */}
+    <label>
+      Filter Resolved Items
+      <input
+        type="checkbox"
+        checked={filterResolved}
+        onChange={handleFilterToggle}
+      />
+    </label>
+  </div>
+  <button onClick={toggleViewMode}>
+    {viewMode === 'list' ? 'Show as Tiles' : 'Show as List'}
+  </button>
+</div>
+
       {viewMode === 'tiles' ? (
         <div className="tile-container">
           {shoppingList.items.map(item => (

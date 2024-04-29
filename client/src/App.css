@@ -1,6 +1,8 @@
 .App {
   text-align: center;
   margin-top: 55px;
+  background-color: white;
+  color: black;
 }
 
 .App.dark {
@@ -9,3 +11,15 @@
   background-color: black;
   color: white;
 }
+
+body.light {
+  background-color: white;
+  color: black;
+}
+
+body.dark {
+  background-color: black;
+  color: white;
+}
+
+

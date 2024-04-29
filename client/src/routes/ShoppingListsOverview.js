@@ -134,43 +134,45 @@ function ShoppingListsOverview({ shoppingLists, setShoppingLists, removeShopping
         </button>
       </div>
       {viewMode === 'tiles' ? (
-        <div className="tile-container">
-          {shoppingLists.map(list => (
-            (showArchived || !list.archived) && (
-              <ShoppingListTile
-                key={list.id}
-                item={list}
-                onArchive={() => (user ? handleArchiveList(list.id) : null)}
-                onRemove={() => handleRemoveList(list.id)}
-                isOwner={user && list.owner === user.username}
-              />
-            )
-          ))}
-        </div>
-      ) : (
-        <ul>
-          {shoppingLists.map(list => (
-            (showArchived || !list.archived) && (
-              <li key={list.id}>
-                {list && (
-                  <Link to={`/shopping-list/${list.id}`}>{list.name}</Link>
-                )}
+  <div className="tile-container">
+    {shoppingLists.map(list => (
+      (showArchived || !list.archived) && (
+        <ShoppingListTile
+          key={list.id}
+          item={list}
+          onArchive={() => (user ? handleArchiveList(list.id) : null)}
+          onRemove={() => handleRemoveList(list.id)}
+          isOwner={user && list.owner === user.username}
+        />
+      )
+    ))}
+  </div>
+) : (
+  <ul>
+    {shoppingLists.map(list => (
+      (showArchived || !list.archived) && (
+        <li key={list.id} className="list-item">
+          {list && (
+            <Link to={`/shopping-list/${list.id}`}>{list.name}</Link>
+          )}
 
-                {user && list.owner === user.username && (
-                  <button onClick={() => handleRemoveList(list.id)}>
-                    <img src={removeIcon} alt="Remove Shopping List" width="20" height="20" />
-                  </button>
-                )}
-                {user && (
-                  <button onClick={() => handleArchiveList(list.id)}>
-                    <img src={archiveIcon} alt="Archive List" width="20" height="20" />
-                  </button>
-                )}
-              </li>
-            )
-          ))}
-        </ul>
-      )}
+          <div className="action-buttons">
+            {user && list.owner === user.username && (
+              <button onClick={() => handleRemoveList(list.id)}>
+                <img src={removeIcon} alt="Remove Shopping List" width="20" height="20" />
+              </button>
+            )}
+            {user && (
+              <button onClick={() => handleArchiveList(list.id)}>
+                <img src={archiveIcon} alt="Archive List" width="20" height="20" />
+              </button>
+            )}
+          </div>
+        </li>
+      )
+    ))}
+  </ul>
+)}
       <div>
         <div style={{ textAlign: 'center' }}>
           <div>

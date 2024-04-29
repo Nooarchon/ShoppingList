@@ -1,65 +1,82 @@
-/* General Styles */
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-}
-
-.dark-mode {
-  background-color: #222;
-  color: #fff;
-}
-
-.light-mode {
-  background-color: #fff;
-  color: #222;
-}
-
 /* Container Styles */
 .app-container {
   height: 100vh; /* Use viewport height */
 }
 
-.shopping-lists-container {
-  max-width: 800px; /* Adjusted max-width */
-  margin: 50px auto; /* Reduced margin */
-  padding: 30px;
-  background-color: #f9f9f9; /* Slightly lighter background */
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+
+.mode-toggle {
+  /* Styles for the mode toggle button */
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 20px;
 }
 
-/* Heading Styles */
+.list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px; /* Adjust the gap as needed */
+}
+
+
+.mode-toggle:hover {
+  background-color: #0056b3;
+}
+/* Heading styles */
 h2 {
   text-align: center;
-  margin-bottom: 30px;
-  color: #333;
-  font-weight: bold; /* Added font weight */
+  margin-bottom: 20px;
+}
+/* Shopping List Styles */
+.shopping-list-container {
+  max-width: 1000px;
+  margin: 20px auto; /* Adjusted margin */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+  color: #ffffff; /* Dark mode text color */
 }
 
-/* List Styles */
+/* List styles */
 ul {
+  margin: 0;
   padding: 0;
+  list-style: none; /* Remove default list styles */
 }
 
 li {
-  margin-bottom: 15px; /* Increased margin */
-  display: flex;
-  align-items: center; /* Align items vertically */
+  margin-bottom: 10px; /* Reduced margin */
 }
+
 
 li button {
   margin-left: auto; /* Push buttons to the right */
 }
 
+.checkbox-container {
+  display: flex;
+  align-items: center; /* Center items vertically */
+  justify-content: center; /* Center items horizontally */
+}
+
 
 /* Input Styles */
-input[type="text"], input[type="password"] {
+input[type="text"],
+input[type="password"] {
   padding: 12px;
   border: 1px solid #ddd;
   border-radius: 6px;
-  width: calc(100% - 24px); /* Adjusted width */
+  width: calc(80% - 24px); /* Adjusted width */
   box-sizing: border-box;
+  text-align: center; /* Center the text horizontally */
 }
 
 /* Button Styles */
@@ -74,28 +91,31 @@ button {
 }
 
 button.centered {
-  margin: 20px auto; /* Increased margin */
+  margin: 20px auto; /* Center buttons */
   display: block;
 }
-
-button:hover {
-  background-color: #0056b3; /* Darker hover color */
+/* Button Container */
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
 }
 
-.back-button {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+.back-link {
+  background-color: #0056b3;
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
 }
 
-.back-link img {
-  width: 30px; /* Adjust as needed */
-  height: 30px; /* Adjust as needed */
+.back-link:hover {
+  background-color: #004080; /* Darken the background color on hover */
 }
 
-.back-link img:hover {
-  opacity: 0.8; /* Adjust hover effect as needed */
+.dark-mode .back-link {
+  background-color: #0056b3; /* Adjust the background color for dark mode */
 }
 
 /* Modal Styles */
@@ -115,61 +135,47 @@ button:hover {
   z-index: 1000;
 }
 
-/* Button Container */
-.button-container {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-}
-
-/* Shopping List Details */
-.shopping-list-container {
-  padding: 0 20px; /* Added padding */
-}
-
-.shopping-list-container button {
-  margin-top: 20px; /* Add margin between buttons and other elements */
-}
-
-/* Modal Container */
+/* Modal Styles */
 .modal-container {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* Modal Background */
 .modal-background {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
   cursor: pointer;
 }
 
-/* Modal Dialog */
 .modal-dialog {
   position: relative;
   z-index: 1000;
 }
 
-/* Modal Content */
 .modal-content {
   position: relative;
-  background-color: #fefefe;
+  background-color: #fefefe; /* Light mode background color */
+  color: #333; /* Light mode text color */
   border-radius: 5px;
   padding: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Box shadow for depth */
 }
 
-/* Close Button */
+.dark-mode .modal-content {
+  background-color: #1a1a1a; /* Dark mode background color */
+  color: #ffffff; /* Dark mode text color */
+}
+
 .close {
   position: absolute;
   top: 10px;

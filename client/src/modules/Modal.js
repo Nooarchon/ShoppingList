@@ -1,15 +1,15 @@
-// Modal.js
-
 import React from 'react';
 import './modal.css';
 
-const Modal = ({ onClose, children }) => {
+const Modal = ({ children, onClose, isDarkMode }) => {
+  const modalStyle = isDarkMode ? 'dark-mode' : 'light-mode';
+
   return (
-    <div className="modal-container">
+    <div className={`modal-container ${modalStyle}`}>
       <div className="modal-background" onClick={onClose}></div>
       <div className="modal-dialog">
-        <div className="modal-content">
-          <span className="close" onClick={onClose}>&times;</span>
+        <div className={`modal-content ${modalStyle}`}>
+          <span className="close" onClick={onClose}>X</span>
           {children}
         </div>
       </div>
