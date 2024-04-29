@@ -13,11 +13,13 @@
 }
 
 body.light {
+  text-align: center;
   background-color: white;
   color: black;
 }
 
 body.dark {
+  text-align: center;
   background-color: black;
   color: white;
 }
