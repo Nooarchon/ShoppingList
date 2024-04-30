@@ -1,8 +1,12 @@
 // i18n.js
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import enTranslation from '../locales/en.json';
-import czTranslation from '../locales/cz.json';
+import enTranslation from './locales/en.json';
+import czTranslation from './locales/cz.json';
+
+export const changeLanguage = (language) => {
+  i18n.changeLanguage(language);
+};
 
 i18n
   .use(initReactI18next)
@@ -15,10 +19,10 @@ i18n
         translation: czTranslation
       }
     },
-    lng: 'en', // Set the default language
-    fallbackLng: 'en', // Fallback language if translation key is not found
+    lng: 'en',
+    fallbackLng: 'en',
     interpolation: {
-      escapeValue: false // React already safes from xss
+      escapeValue: false
     }
   });
 

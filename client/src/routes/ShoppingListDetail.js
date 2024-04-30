@@ -5,16 +5,14 @@ import removeIcon from '../images/remove_icon.png';
 import addIcon from '../images/add_icon.png';
 import backIcon from '../images/back_icon.png';
 import ShoppingListTile from '../utils/ShoppingListTile';
-import { useTranslation } from 'react-i18next'; // Import useTranslation hook
 
-function ShoppingListDetail({ shoppingLists, updateShoppingList, user }) {
+function ShoppingListDetail({ shoppingLists, updateShoppingList, user, language, onLanguageChange }) {
   const { id } = useParams();
   const [editedName, setEditedName] = useState('');
   const [newMember, setNewMember] = useState('');
   const [newItemName, setNewItemName] = useState('');
   const [filterResolved, setFilterResolved] = useState(false);
-  const [viewMode, setViewMode] = useState('list'); // 'list' or 'tiles'
-  const { t } = useTranslation();
+  const [viewMode, setViewMode] = useState('list');
 
   const shoppingList = shoppingLists.find(list => list.id === parseInt(id));
 
@@ -44,7 +42,7 @@ function ShoppingListDetail({ shoppingLists, updateShoppingList, user }) {
     updateShoppingList({ ...shoppingList, members: updatedMembers });
     setNewMember('');
   };
-  
+
   const handleMemberRemove = (member) => {
     if (member === shoppingList.owner) {
       alert("The owner cannot be removed from the list.");
@@ -53,12 +51,12 @@ function ShoppingListDetail({ shoppingLists, updateShoppingList, user }) {
     if (user.username === shoppingList.owner) {
       console.log('Removed Member:', member);
       const updatedMembers = shoppingList.members.filter(m => m !== member);
-       updateShoppingList({ ...shoppingList, members: updatedMembers });
+      updateShoppingList({ ...shoppingList, members: updatedMembers });
     } else {
       alert("You don't have permission to remove members.");
     }
   };
-  
+
   const handleLeaveList = () => {
     if (user.username === shoppingList.owner) {
       alert("As the owner, you cannot leave the list.");
@@ -68,7 +66,7 @@ function ShoppingListDetail({ shoppingLists, updateShoppingList, user }) {
     const updatedMembers = shoppingList.members.filter(member => member !== user.username);
     updateShoppingList({ ...shoppingList, members: updatedMembers });
   };
-  
+
   const handleItemAdd = () => {
     if (!/^[a-zA-Z\s]+$/.test(newItemName.trim())) {
       alert('Please enter a valid item name containing only letters.');
@@ -80,7 +78,7 @@ function ShoppingListDetail({ shoppingLists, updateShoppingList, user }) {
     updateShoppingList({ ...shoppingList, items: updatedItems });
     setNewItemName('');
   };
-  
+
   const handleItemRemove = (itemId) => {
     console.log('Removed Item ID:', itemId);
     const updatedItems = shoppingList.items.filter(item => item.id !== itemId);
@@ -95,7 +93,7 @@ function ShoppingListDetail({ shoppingLists, updateShoppingList, user }) {
     console.log('Updated Items:', updatedItems);
     updateShoppingList({ ...shoppingList, items: updatedItems });
   };
-  
+
   const handleFilterToggle = () => {
     setFilterResolved(!filterResolved);
   };
@@ -105,7 +103,7 @@ function ShoppingListDetail({ shoppingLists, updateShoppingList, user }) {
   };
 
   return (
-    <div>
+    <div className="shopping-lists-container">
       <h2>
         {user.username === shoppingList.owner ? (
           <input
@@ -119,58 +117,69 @@ function ShoppingListDetail({ shoppingLists, updateShoppingList, user }) {
           <span>{shoppingList.name}</span>
         )}
       </h2>
+      <div>
+        <h2>{language === 'en' ? 'Shopping List Detail' : 'Podrobnosti nákupního seznamu'}</h2>
+        <button onClick={() => onLanguageChange('en')}>English</button>
+        <button onClick={() => onLanguageChange('cz')}>Čeština</button>
+      </div>
       <p>Owner: {shoppingList.owner}</p>
   
+      <h3>Items:</h3>
+      {/* Items section content */}
+      
       <h3>Members:</h3>
-      <ul>
-        {shoppingList.members.map(member => (
-          <li key={member}>
-            {member}
-            {user.username === shoppingList.owner && member !== shoppingList.owner && (
-              <button onClick={() => handleMemberRemove(member)}>
-                <img src={removeIcon} alt="Remove Member" width="20" height="20" />
+      <div className="member-container">
+        <ul>
+          {shoppingList.members.map(member => (
+            <li key={member}>
+              {member}
+              {user.username === shoppingList.owner && member !== shoppingList.owner && (
+                <button onClick={() => handleMemberRemove(member)}>
+                  <img src={removeIcon} alt="Remove Member" width="20" height="20" />
+                </button>
+              )}
+            </li>
+          ))}
+          {user.username !== shoppingList.owner && (
+            <li>
+              <button onClick={handleLeaveList}>
+                Leave List
               </button>
-            )}
-          </li>
-        ))}
-        {user.username !== shoppingList.owner && (
-          <li>
-            <button onClick={handleLeaveList}>
-              Leave List
-            </button>
-          </li>
-        )}
-        {user.username === shoppingList.owner && (
-          <li>
-            <input
-              type="text"
-              value={newMember}
-              onChange={(e) => setNewMember(e.target.value)}
-              placeholder="Enter new member name"
-            />
-            <button onClick={handleMemberAdd}>
-              <img src={addIcon} alt="Add Member" width="20" height="20" />
-            </button>
-          </li>
-        )}
-      </ul>
+            </li>
+          )}
+          {user.username === shoppingList.owner && (
+            <li>
+              <input
+                type="text"
+                value={newMember}
+                onChange={(e) => setNewMember(e.target.value)}
+                placeholder="Enter new member name"
+              />
+              <button onClick={handleMemberAdd}>
+                <img src={addIcon} alt="Add Member" width="20" height="20" />
+              </button>
+            </li>
+          )}
+        </ul>
+      </div>
   
-      <h3>Items:</h3><div className="filter-container">
-  <div className="checkbox-container"> {/* Wrap checkbox inside a div */}
-    <label>
-      Filter Resolved Items
-      <input
-        type="checkbox"
-        checked={filterResolved}
-        onChange={handleFilterToggle}
-      />
-    </label>
-  </div>
-  <button onClick={toggleViewMode}>
-    {viewMode === 'list' ? 'Show as Tiles' : 'Show as List'}
-  </button>
-</div>
-
+      <h3>Items:</h3>
+      <div className="filter-container">
+        <div className="checkbox-container"> {/* Wrap checkbox inside a div */}
+          <label>
+            Filter Resolved Items
+            <input
+              type="checkbox"
+              checked={filterResolved}
+              onChange={handleFilterToggle}
+            />
+          </label>
+        </div>
+        <button onClick={toggleViewMode}>
+          {viewMode === 'list' ? 'Show as Tiles' : 'Show as List'}
+        </button>
+      </div>
+  
       {viewMode === 'tiles' ? (
         <div className="tile-container">
           {shoppingList.items.map(item => (
@@ -230,6 +239,7 @@ function ShoppingListDetail({ shoppingLists, updateShoppingList, user }) {
       </Link>
     </div>
   );
+  
 }
 
 export default ShoppingListDetail;

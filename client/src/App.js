@@ -1,4 +1,3 @@
-// App.js
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { getData, postData, deleteData, updateData } from './calls/Call'; // Import the HTTP request functions
@@ -12,19 +11,15 @@ function App() {
   const [shoppingLists, setShoppingLists] = useState([]);
   const [user, setUser] = useState(null);
   const [isDarkMode, setIsDarkMode] = useState(false);
- // const { t, i18n } = useTranslation();
+  const [language, setLanguage] = useState('en'); // Add language state
 
- // function lngChange(language) {
-//    i18n.changeLanguage(language); };
- 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
   };
-  
+
   useEffect(() => {
     document.body.className = isDarkMode ? 'dark' : 'light';
   }, [isDarkMode]);
-  
 
   useEffect(() => {
     // Fetch initial data when component mounts
@@ -39,7 +34,6 @@ function App() {
       console.error('Failed to fetch data:', error.message);
     }
   };
-
 
   const addNewShoppingList = async (newList) => {
     try {
@@ -69,13 +63,16 @@ function App() {
       console.error('Failed to remove shopping list:', error.message);
     }
   };
-//   <NavDropdown.Item onClick={() => lngChange("en")}>English     EN</NavDropdown.Item>  
-  //    <NavDropdown.Item onClick={() => lngChange("cz")}>Čeština  CZ</NavDropdown.Item>
+
+  const handleLanguageChange = (language) => {
+    setLanguage(language); // Update language state
+  };
+
   return (
     <div className={`App ${isDarkMode ? 'dark' : 'light'}`}>
-    <button className="mode-toggle" onClick={toggleDarkMode}>
-      {isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-    </button>
+      <button className="mode-toggle" onClick={toggleDarkMode}>
+        {isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+      </button>
       <Router>
         <Routes>
           <Route
@@ -87,8 +84,10 @@ function App() {
               user={user}
               setUser={setUser}
               updateShoppingList={updateShoppingList}
+              onLanguageChange={handleLanguageChange} // Pass handleLanguageChange function
             />}
           />
+
           <Route
             path="/create-shopping-list"
             element={<CreateShoppingList addNewShoppingList={addNewShoppingList} />}
@@ -100,6 +99,7 @@ function App() {
               updateShoppingList={updateShoppingList}
               user={user}
               setUser={setUser}
+              language={language} // Pass language state
             />}
           />
         </Routes>

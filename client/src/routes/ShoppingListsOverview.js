@@ -116,7 +116,7 @@ function ShoppingListsOverview({ shoppingLists, setShoppingLists, removeShopping
           </button>
         </>
       ) : (
-        <button onClick={handleLogin}>Login</button>
+        <button onClick={handleLogin} >Login</button>
       )}
       <div>
         <label>
