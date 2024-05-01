@@ -1,6 +1,6 @@
-const mongoose = require('mongoose'); // Import Mongoose
+// models/shopping-list.js
 
-/******************************************************************************************************/
+const mongoose = require('mongoose');
 
 const shoppingListSchema = new mongoose.Schema({
     title: {
@@ -22,7 +22,7 @@ const shoppingListSchema = new mongoose.Schema({
     },
     items: {
         type: [{  
-            _id: false, // Turn of generating MongoDB Id for object of item 
+            _id: false, // Turn off generating MongoDB Id for object of item 
             item: String,
             amount: Number,
             unit: {
@@ -38,10 +38,8 @@ const shoppingListSchema = new mongoose.Schema({
         }],
         required: false
     },
-})
+});
 
 const ShoppingList = mongoose.model('ShoppingList', shoppingListSchema);
-
-/******************************************************************************************************/
 
 module.exports = ShoppingList;

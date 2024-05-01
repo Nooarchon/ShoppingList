@@ -1,3 +1,5 @@
+// controller/shopping-list-controller.js
+
 const express = require("express");
 const router = express.Router();
 const { createShoppingList, getShoppingList, listShoppingList, deleteShoppingList, updateShoppingList } = require("../abl/shopping-list-abl");
