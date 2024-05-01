@@ -1,11 +1,20 @@
+
 {
-  "switchToEnglish": "Switch to English",
-  "switchToCzech": "Přepnout do češtiny",
-  "translation": {
-    "archiveList": "Archive List",
-    "login": "Log in",
-    "members": "Members",
-    "owner": "Owner",
-    "resolveItems": "Resolve Items"
-  }
+  "appTitle": "Shopping List App",
+  "switchToDarkMode": "Switch to Dark Mode",
+  "switchToLightMode": "Switch to Light Mode",
+  "shoppingListDetail": "Shopping List Detail",
+  "overview": "Overview",
+  "owner": "Owner",
+  "items": "Items",
+  "members": "Members",
+  "filterResolvedItems": "Filter Resolved Items",
+  "showAsTiles": "Show as Tiles",
+  "showAsList": "Show as List",
+  "addMember": "Add Member",
+  "enterNewMemberName": "Enter new member name",
+  "leaveList": "Leave List",
+  "addItem": "Add Item",
+  "enterNewItemName": "Enter new item name",
+  "backToShoppingListsOverview": "Back to Shopping Lists Overview"
 }

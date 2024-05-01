@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next'; // Import useTranslation hook
 import markAsResolvedIcon from '../images/mark_as_resolved_icon.png';
 import removeIcon from '../images/remove_icon.png';
 import addIcon from '../images/add_icon.png';
 import backIcon from '../images/back_icon.png';
 import ShoppingListTile from '../utils/ShoppingListTile';
 
-function ShoppingListDetail({ shoppingLists, updateShoppingList, user, language, onLanguageChange }) {
+function ShoppingListDetail({ shoppingLists, updateShoppingList, user }) {
   const { id } = useParams();
+  const { t, i18n } = useTranslation(); // Initialize useTranslation hook
+
   const [editedName, setEditedName] = useState('');
   const [newMember, setNewMember] = useState('');
   const [newItemName, setNewItemName] = useState('');
@@ -104,82 +107,79 @@ function ShoppingListDetail({ shoppingLists, updateShoppingList, user, language,
 
   return (
     <div className="shopping-lists-container">
-      <h2>
-        {user.username === shoppingList.owner ? (
-          <input
-            type="text"
-            value={editedName || shoppingList.name}
-            onChange={handleNameChange}
-            onBlur={() => updateShoppingList({ ...shoppingList, name: editedName })}
-            placeholder="Enter shopping list name"
-          />
-        ) : (
-          <span>{shoppingList.name}</span>
+    <h2>
+      {user.username === shoppingList.owner ? (
+        <input
+          type="text"
+          value={editedName || shoppingList.name}
+          onChange={handleNameChange}
+          onBlur={() => updateShoppingList({ ...shoppingList, name: editedName })}
+          placeholder={t('enterShoppingListName')}
+        />
+      ) : (
+        <span>{shoppingList.name}</span>
+      )}
+    </h2>
+    <div>
+      <h2>{t('shoppingListDetail')}</h2>
+      <button onClick={() => i18n.changeLanguage('en')}>English</button>
+      <button onClick={() => i18n.changeLanguage('cz')}>Čeština</button>
+    </div>
+    <p>{t('owner')}: {shoppingList.owner}</p>
+
+    <h3>{t('members')}:</h3> {/* Use translation for "Members" */}
+    <div className="member-container">
+      <ul>
+        {shoppingList.members.map(member => (
+          <li key={member}>
+            {member}
+            {user.username === shoppingList.owner && member !== shoppingList.owner && (
+              <button onClick={() => handleMemberRemove(member)}>
+                <img src={removeIcon} alt="Remove Member" width="20" height="20" />
+              </button>
+            )}
+          </li>
+        ))}
+        {user.username !== shoppingList.owner && (
+          <li>
+            <button onClick={handleLeaveList}>
+              {t('leaveList')}
+            </button>
+          </li>
         )}
-      </h2>
-      <div>
-        <h2>{language === 'en' ? 'Shopping List Detail' : 'Podrobnosti nákupního seznamu'}</h2>
-        <button onClick={() => onLanguageChange('en')}>English</button>
-        <button onClick={() => onLanguageChange('cz')}>Čeština</button>
-      </div>
-      <p>Owner: {shoppingList.owner}</p>
-  
-      <h3>Items:</h3>
-      {/* Items section content */}
-      
-      <h3>Members:</h3>
-      <div className="member-container">
-        <ul>
-          {shoppingList.members.map(member => (
-            <li key={member}>
-              {member}
-              {user.username === shoppingList.owner && member !== shoppingList.owner && (
-                <button onClick={() => handleMemberRemove(member)}>
-                  <img src={removeIcon} alt="Remove Member" width="20" height="20" />
-                </button>
-              )}
-            </li>
-          ))}
-          {user.username !== shoppingList.owner && (
-            <li>
-              <button onClick={handleLeaveList}>
-                Leave List
-              </button>
-            </li>
-          )}
-          {user.username === shoppingList.owner && (
-            <li>
-              <input
-                type="text"
-                value={newMember}
-                onChange={(e) => setNewMember(e.target.value)}
-                placeholder="Enter new member name"
-              />
-              <button onClick={handleMemberAdd}>
-                <img src={addIcon} alt="Add Member" width="20" height="20" />
-              </button>
-            </li>
-          )}
-        </ul>
-      </div>
-  
-      <h3>Items:</h3>
-      <div className="filter-container">
-        <div className="checkbox-container"> {/* Wrap checkbox inside a div */}
-          <label>
-            Filter Resolved Items
+        {user.username === shoppingList.owner && (
+          <li>
             <input
-              type="checkbox"
-              checked={filterResolved}
-              onChange={handleFilterToggle}
+              type="text"
+              value={newMember}
+              onChange={(e) => setNewMember(e.target.value)}
+              placeholder={t('enterNewMemberName')}
             />
-          </label>
-        </div>
-        <button onClick={toggleViewMode}>
-          {viewMode === 'list' ? 'Show as Tiles' : 'Show as List'}
-        </button>
+            <button onClick={handleMemberAdd}>
+              <img src={addIcon} alt="Add Member" width="20" height="20" />
+            </button>
+          </li>
+        )}
+      </ul>
+    </div>
+
+    <h3>{t('items')}:</h3> {/* Use translation for "Items" */}
+    <div className="filter-container">
+      <div className="checkbox-container"> {/* Wrap checkbox inside a div */}
+        <label>
+          {t('filterResolvedItems')}
+          <input
+            type="checkbox"
+            checked={filterResolved}
+            onChange={handleFilterToggle}
+          />
+        </label>
       </div>
-  
+      <button onClick={toggleViewMode}>
+        {viewMode === 'list' ? t('showAsTiles') : t('showAsList')}
+      </button>
+    </div>
+
       {viewMode === 'tiles' ? (
         <div className="tile-container">
           {shoppingList.items.map(item => (
@@ -233,13 +233,13 @@ function ShoppingListDetail({ shoppingLists, updateShoppingList, user, language,
           </ul>
         </div>
       )}
-  
+
       <Link to="/" className="back-link">
-        <img src={backIcon} alt="Back to Shopping Lists Overview" width="20" height="20" />
+        <img src={backIcon} alt={t('backToShoppingListsOverview')} width="20" height="20" /> {/* Use translation for alt text */}
       </Link>
     </div>
   );
-  
+
 }
 
 export default ShoppingListDetail;

@@ -1,3 +1,4 @@
+// ShoppingListsOverview.js
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import addIcon from '../images/add_icon.png';
@@ -7,8 +8,12 @@ import archiveIcon from '../images/archive_icon.png';
 import ShoppingListTile from '../utils/ShoppingListTile';
 import Modal from '../modules/Modal';
 import DeleteConfirmationDialog from './DeleteConfirmationDialog'; // Import the DeleteConfirmationDialog component here
+import { changeLanguage } from '../i18n'; // Import the changeLanguage function
+import { useTranslation } from 'react-i18next'; // Import useTranslation hook
 
-function ShoppingListsOverview({ shoppingLists, setShoppingLists, removeShoppingList, user, setUser, updateShoppingList }) {
+function ShoppingListsOverview({ shoppingLists, setShoppingLists, removeShoppingList, user, setUser, language, updateShoppingList }) {
+  const { t } = useTranslation(); // Initialize useTranslation hook
+
   const [newListName, setNewListName] = useState('');
   const [error, setError] = useState('');
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -105,7 +110,12 @@ function ShoppingListsOverview({ shoppingLists, setShoppingLists, removeShopping
 
   return (
     <div className="shopping-lists-container">
-      <h2>Shopping Lists Overview</h2>
+      <h2>{t('appTitle')}</h2>
+      <div>
+        <button onClick={() => changeLanguage('en')}>English</button>
+        <button onClick={() => changeLanguage('cz')}>Czech</button>
+      </div>
+
       {user ? (
         <>
           <p>
@@ -116,11 +126,11 @@ function ShoppingListsOverview({ shoppingLists, setShoppingLists, removeShopping
           </button>
         </>
       ) : (
-        <button onClick={handleLogin} >Login</button>
+        <button onClick={handleLogin} >{t('login')}</button>
       )}
       <div>
         <label>
-          Show Archived Lists
+          {t('showArchivedLists')}
           <input
             type="checkbox"
             checked={showArchived}
@@ -130,49 +140,49 @@ function ShoppingListsOverview({ shoppingLists, setShoppingLists, removeShopping
       </div>
       <div>
         <button onClick={handleToggleViewMode}>
-          {viewMode === 'list' ? 'Show as Tiles' : 'Show as List'}
+          {viewMode === 'list' ? t('showAsTiles') : t('showAsList')}
         </button>
       </div>
       {viewMode === 'tiles' ? (
-  <div className="tile-container">
-    {shoppingLists.map(list => (
-      (showArchived || !list.archived) && (
-        <ShoppingListTile
-          key={list.id}
-          item={list}
-          onArchive={() => (user ? handleArchiveList(list.id) : null)}
-          onRemove={() => handleRemoveList(list.id)}
-          isOwner={user && list.owner === user.username}
-        />
-      )
-    ))}
-  </div>
-) : (
-  <ul>
-    {shoppingLists.map(list => (
-      (showArchived || !list.archived) && (
-        <li key={list.id} className="list-item">
-          {list && (
-            <Link to={`/shopping-list/${list.id}`}>{list.name}</Link>
-          )}
+        <div className="tile-container">
+          {shoppingLists.map(list => (
+            (showArchived || !list.archived) && (
+              <ShoppingListTile
+                key={list.id}
+                item={list}
+                onArchive={() => (user ? handleArchiveList(list.id) : null)}
+                onRemove={() => handleRemoveList(list.id)}
+                isOwner={user && list.owner === user.username}
+              />
+            )
+          ))}
+        </div>
+      ) : (
+        <ul>
+          {shoppingLists.map(list => (
+            (showArchived || !list.archived) && (
+              <li key={list.id} className="list-item">
+                {list && (
+                  <Link to={`/shopping-list/${list.id}`}>{list.name}</Link>
+                )}
 
-          <div className="action-buttons">
-            {user && list.owner === user.username && (
-              <button onClick={() => handleRemoveList(list.id)}>
-                <img src={removeIcon} alt="Remove Shopping List" width="20" height="20" />
-              </button>
-            )}
-            {user && (
-              <button onClick={() => handleArchiveList(list.id)}>
-                <img src={archiveIcon} alt="Archive List" width="20" height="20" />
-              </button>
-            )}
-          </div>
-        </li>
-      )
-    ))}
-  </ul>
-)}
+                <div className="action-buttons">
+                  {user && list.owner === user.username && (
+                    <button onClick={() => handleRemoveList(list.id)}>
+                      <img src={removeIcon} alt="Remove Shopping List" width="20" height="20" />
+                    </button>
+                  )}
+                  {user && (
+                    <button onClick={() => handleArchiveList(list.id)}>
+                      <img src={archiveIcon} alt="Archive List" width="20" height="20" />
+                    </button>
+                  )}
+                </div>
+              </li>
+            )
+          ))}
+        </ul>
+      )}
       <div>
         <div style={{ textAlign: 'center' }}>
           <div>
@@ -188,28 +198,28 @@ function ShoppingListsOverview({ shoppingLists, setShoppingLists, removeShopping
           <form onSubmit={handleLoginSubmit}>
             <input
               type="text"
-              placeholder="Username"
+              placeholder={t('username')}
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
             <input
               type="password"
-              placeholder="Password"
+              placeholder={t('password')}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               autoComplete="current-password"
             />
-            <button className="centered" onClick={handleLogin}>Login</button>
+            <button className="centered" onClick={handleLogin}>{t('login')}</button>
           </form>
         </div>
       )}
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <div>
-            <h3>Create New Shopping List</h3>
+            <h3>{t('createNewShoppingList')}</h3>
             <input
               type="text"
-              placeholder="Enter shopping list name"
+              placeholder={t('enterShoppingListName')}
               value={newListName}
               onChange={handleInputChange}
             />

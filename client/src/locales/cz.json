@@ -1,11 +1,20 @@
+
 {
-  "switchToEnglish": "Switch to English",
-  "switchToCzech": "Přepnout do češtiny",
-  "translation": {
-    "archiveList": "Archivovat seznam",
-    "login": "Přihlásit se",
-    "members": "Členové",
-    "owner": "Vlastník",
-    "resolveItems": "Vyřešit položky"
-  }
+  "appTitle": "Aplikace Seznamu Nakupování",
+  "switchToDarkMode": "Přepnout na tmavý režim",
+  "switchToLightMode": "Přepnout na světlý režim",
+  "shoppingListDetail": "Podrobnosti nákupního seznamu",
+  "overview": "Přehled",
+  "owner": "Vlastník",
+  "items": "Položky",
+  "members": "Členové",
+  "filterResolvedItems": "Filtrovat vyřešené položky",
+  "showAsTiles": "Zobrazit jako dlaždice",
+  "showAsList": "Zobrazit jako seznam",
+  "addMember": "Přidat člena",
+  "enterNewMemberName": "Zadejte jméno nového člena",
+  "leaveList": "Opustit seznam",
+  "addItem": "Přidat položku",
+  "enterNewItemName": "Zadejte název nové položky",
+  "backToShoppingListsOverview": "Zpět na přehled nákupních seznamů"
 }

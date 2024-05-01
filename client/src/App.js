@@ -1,13 +1,18 @@
+// App.js
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { getData, postData, deleteData, updateData } from './calls/Call'; // Import the HTTP request functions
 import CreateShoppingList from './modules/CreateShoppingList';
 import ShoppingListsOverview from './routes/ShoppingListsOverview';
 import ShoppingListDetail from './routes/ShoppingListDetail';
+import { changeLanguage } from './i18n'; // Import the changeLanguage function
+import { I18nextProvider, useTranslation } from 'react-i18next'; // Import useTranslation hook
 import './App.css';
 import styles from "./styles/styles.css";
 
 function App() {
+  const { t } = useTranslation(); // Initialize useTranslation hook
+
   const [shoppingLists, setShoppingLists] = useState([]);
   const [user, setUser] = useState(null);
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -66,12 +71,13 @@ function App() {
 
   const handleLanguageChange = (language) => {
     setLanguage(language); // Update language state
+    changeLanguage(language); // Call changeLanguage function
   };
 
   return (
     <div className={`App ${isDarkMode ? 'dark' : 'light'}`}>
       <button className="mode-toggle" onClick={toggleDarkMode}>
-        {isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+        {isDarkMode ? t('switchToLightMode') : t('switchToDarkMode')}
       </button>
       <Router>
         <Routes>
@@ -100,6 +106,7 @@ function App() {
               user={user}
               setUser={setUser}
               language={language} // Pass language state
+              onLanguageChange={handleLanguageChange} // Pass onLanguageChange function
             />}
           />
         </Routes>
