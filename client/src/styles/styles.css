@@ -140,9 +140,7 @@ li button {
   margin-top: 10px; /* Reduce margin between list items */
 text-align: center;
 }
-.list-item button{
-margin-left: 10px;
-}
+
 .list-item input{
   align-items: center;
   max-width: 350px;

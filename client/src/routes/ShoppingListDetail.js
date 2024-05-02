@@ -107,78 +107,78 @@ function ShoppingListDetail({ shoppingLists, updateShoppingList, user }) {
 
   return (
     <div className="shopping-lists-container">
-    <h2>
-      {user.username === shoppingList.owner ? (
-        <input
-          type="text"
-          value={editedName || shoppingList.name}
-          onChange={handleNameChange}
-          onBlur={() => updateShoppingList({ ...shoppingList, name: editedName })}
-          placeholder={t('enterShoppingListName')}
-        />
-      ) : (
-        <span>{shoppingList.name}</span>
-      )}
-    </h2>
-    <div>
-      <h2>{t('shoppingListDetail')}</h2>
-      <button onClick={() => i18n.changeLanguage('en')}>English</button>
-      <button onClick={() => i18n.changeLanguage('cz')}>Čeština</button>
-    </div>
-    <p>{t('owner')}: {shoppingList.owner}</p>
-
-    <h3>{t('members')}:</h3> {/* Use translation for "Members" */}
-    <div className="member-container">
-      <ul>
-        {shoppingList.members.map(member => (
-          <li key={member}>
-            {member}
-            {user.username === shoppingList.owner && member !== shoppingList.owner && (
-              <button onClick={() => handleMemberRemove(member)}>
-                <img src={removeIcon} alt="Remove Member" width="20" height="20" />
-              </button>
-            )}
-          </li>
-        ))}
-        {user.username !== shoppingList.owner && (
-          <li>
-            <button onClick={handleLeaveList}>
-              {t('leaveList')}
-            </button>
-          </li>
-        )}
-        {user.username === shoppingList.owner && (
-          <li>
-            <input
-              type="text"
-              value={newMember}
-              onChange={(e) => setNewMember(e.target.value)}
-              placeholder={t('enterNewMemberName')}
-            />
-            <button onClick={handleMemberAdd}>
-              <img src={addIcon} alt="Add Member" width="20" height="20" />
-            </button>
-          </li>
-        )}
-      </ul>
-    </div>
-
-    <h3>{t('items')}:</h3> {/* Use translation for "Items" */}
-    <div className="filter-container">
-      <div className="checkbox-container"> {/* Wrap checkbox inside a div */}
-        <label>
-          {t('filterResolvedItems')}
+      <h2>
+        {user.username === shoppingList.owner ? (
           <input
-            type="checkbox"
-            checked={filterResolved}
-            onChange={handleFilterToggle}
+            type="text"
+            value={editedName || shoppingList.name}
+            onChange={handleNameChange}
+            onBlur={() => updateShoppingList({ ...shoppingList, name: editedName })}
+            placeholder={t('enterShoppingListName')}
           />
-        </label>
+        ) : (
+          <span>{shoppingList.name}</span>
+        )}
+      </h2>
+      <div>
+        <h2>{t('shoppingListDetail')}</h2>
+        <button onClick={() => i18n.changeLanguage('en')}>English</button>
+        <button onClick={() => i18n.changeLanguage('cz')}>Čeština</button>
       </div>
-      <button onClick={toggleViewMode}>
-        {viewMode === 'list' ? t('showAsTiles') : t('showAsList')}
-      </button>
-    </div>
+      <p>{t('owner')}: {shoppingList.owner}</p>
+
+      <h3>{t('members')}:</h3> {/* Use translation for "Members" */}
+      <div className="member-container">
+        <ul>
+          {shoppingList.members.map(member => (
+            <li key={member}>
+              {member}
+              {user.username === shoppingList.owner && member !== shoppingList.owner && (
+                <button onClick={() => handleMemberRemove(member)}>
+                  <img src={removeIcon} alt="Remove Member" width="20" height="20" />
+                </button>
+              )}
+            </li>
+          ))}
+          {user.username !== shoppingList.owner && (
+            <li>
+              <button onClick={handleLeaveList}>
+                {t('leaveList')}
+              </button>
+            </li>
+          )}
+          {user.username === shoppingList.owner && (
+            <li>
+              <input
+                type="text"
+                value={newMember}
+                onChange={(e) => setNewMember(e.target.value)}
+                placeholder={t('enterNewMemberName')}
+              />
+              <button onClick={handleMemberAdd}>
+                <img src={addIcon} alt="Add Member" width="20" height="20" />
+              </button>
+            </li>
+          )}
+        </ul>
+      </div>
+
+      <h3>{t('items')}:</h3> {/* Use translation for "Items" */}
+      <div className="filter-container">
+        <div className="checkbox-container"> {/* Wrap checkbox inside a div */}
+          <label>
+            {t('filterResolvedItems')}
+            <input
+              type="checkbox"
+              checked={filterResolved}
+              onChange={handleFilterToggle}
+            />
+          </label>
+        </div>
+        <button onClick={toggleViewMode}>
+          {viewMode === 'list' ? t('showAsTiles') : t('showAsList')}
+        </button>
+      </div>
 
       {viewMode === 'tiles' ? (
         <div className="tile-container">
@@ -224,7 +224,7 @@ function ShoppingListDetail({ shoppingLists, updateShoppingList, user }) {
                 type="text"
                 value={newItemName}
                 onChange={(e) => setNewItemName(e.target.value)}
-                placeholder="Enter new item name"
+                placeholder={t('enterNewItemName')}
               />
               <button onClick={handleItemAdd}>
                 <img src={addIcon} alt="Add Item" width="20" height="20" />
@@ -232,8 +232,9 @@ function ShoppingListDetail({ shoppingLists, updateShoppingList, user }) {
             </div>
           </ul>
         </div>
+
       )}
-<p>                                                       </p>
+      <p>                                                       </p>
       <Link to="/" className="back-link">
         <img src={backIcon} alt={t('backToShoppingListsOverview')} width="20" height="20" /> {/* Use translation for alt text */}
       </Link>
