@@ -233,7 +233,7 @@ function ShoppingListDetail({ shoppingLists, updateShoppingList, user }) {
           </ul>
         </div>
       )}
-
+<p>                                                       </p>
       <Link to="/" className="back-link">
         <img src={backIcon} alt={t('backToShoppingListsOverview')} width="20" height="20" /> {/* Use translation for alt text */}
       </Link>

@@ -1,6 +1,6 @@
 /* Container Styles */
 .app-container {
-  height: 100vh; /* Use viewport height */
+  height: 1000px; /* Use viewport height */
 }
 
 .mode-toggle {
@@ -20,6 +20,20 @@
   justify-content: space-between;
 }
 
+.list-item button{
+  align-items: right;
+}
+
+.list-item input {
+  padding: 10px;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center; /* Center the text horizontally */
+}
+
+
 .action-buttons {
   display: flex;
   gap: 8px; /* Reduced gap */
@@ -38,7 +52,7 @@ h2 {
 /* Shopping List Styles */
 
 .shopping-lists-container {
-  max-width: 800px;
+  max-width: 1000px;
   margin: 100px auto;
   padding: 20px;
   background-color: #f0f0f0; /* Light mode background color */
@@ -92,6 +106,12 @@ h2 {
   margin-bottom: 10px;
 }
 
+/* Move back link below input for adding new items */
+.shopping-list-container .back-link {
+  margin-top: 20px; /* Add margin to move the back-link below the input */
+}
+
+
 .shopping-list-container input[type="text"] {
   padding: 10px;
   border: 1px solid #cccccc;
@@ -118,6 +138,16 @@ li button {
 /* Adjust spacing between elements */
 .list-item {
   margin-top: 10px; /* Reduce margin between list items */
+text-align: center;
+}
+.list-item button{
+margin-left: 10px;
+}
+.list-item input{
+  align-items: center;
+  max-width: 350px;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .action-buttons button {
@@ -134,7 +164,20 @@ li button {
 .member-container {
   display: flex;
   flex-direction: column;
+  align-items: left;
+}
+
+.member-container .button{
+  display: flex;
+  flex-direction: column;
   align-items: center;
+
+}
+
+.member-container input{
+max-width: 350px;
+align-items: center;
+
 }
 
 .member-container ul {
@@ -151,6 +194,10 @@ li button {
   margin-left: 6px;
 }
 
+/* Move delete buttons below the archive buttons */
+.archive-buttons button {
+  margin-top: 8px;
+}
 
 .button-container button {
   margin-right: 10px; /* Adjust margin between buttons in the button container */
@@ -159,10 +206,11 @@ li button {
 /* Input Styles */
 input[type="text"],
 input[type="password"] {
+  
   padding: 10px; /* Adjusted padding */
   border: 1px solid #ddd;
   border-radius: 6px;
-  width: 500px; /* Adjusted width */
+  width: 50px; /* Adjusted width */
   box-sizing: border-box;
   text-align: center; /* Center the text horizontally */
 }
@@ -191,21 +239,20 @@ button.centered {
 }
 
 .back-link {
-  background-color: #0056b3;
-  color: #ffffff;
-  padding: 8px 16px; /* Reduced padding */
-  border-radius: 4px;
-  text-decoration: none;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px; /* Adjusted padding */
+  cursor: pointer;
+  border-radius: 6px;
   transition: background-color 0.3s ease;
+  margin-top: auto;
 }
 
 .back-link:hover {
-  background-color: #004080; /* Darken the background color on hover */
+  background-color: #b00e0e; /* Darken the background color on hover */
 }
 
-.dark-mode .back-link {
-  background-color: #0056b3; /* Adjust the background color for dark mode */
-}
 
 /* Modal Styles */
 .modal {
@@ -279,4 +326,87 @@ button.centered {
   top: 10px;
   right: 10px;
   cursor: pointer;
+}
+
+/*Tiles */
+.shopping-list-tile {
+  background-color: #0a5ae3;
+  border: 1px solid #210404;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.tile-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.tile-name {
+  margin-bottom: 8px;
+}
+
+.tile-owner {
+  margin-bottom: 4px;
+  font-style: italic;
+}
+
+.tile-members {
+  font-size: 0.9em;
+  color: #555;
+}
+
+
+/* Define breakpoints for different screen sizes */
+@media screen and (max-width: 768px) {
+  /* Adjust container width and margins for smaller screens */
+  .shopping-lists-container,
+  .shopping-list-container {
+    max-width: 90%; /* Adjusted width */
+    margin: 50px auto; /* Adjusted margins */
+  }
+
+  /* Modify input fields for smaller screens */
+  input[type="text"],
+  input[type="password"] {
+    width: 100%; /* Full width on smaller screens */
+  }
+}
+
+/* Adjust spacing between list items for smaller screens */
+@media screen and (max-width: 576px) {
+  .list-item {
+    margin-top: 6px; /* Further reduce margin */
+  }
+
+  /* Reduce padding for mode toggle button on smaller screens */
+  .mode-toggle {
+    padding: 6px 12px;
+  }
+}
+
+/* Flexbox adjustments for member container */
+@media screen and (max-width: 768px) {
+  .member-container {
+    flex-direction: column; /* Stack items vertically on smaller screens */
+  }
+}
+
+/* Adjust button spacing in button container for smaller screens */
+@media screen and (max-width: 576px) {
+  .button-container {
+    gap: 8px; /* Further reduce gap between buttons */
+  }
+}
+
+/* Adjust modal styles for smaller screens */
+@media screen and (max-width: 576px) {
+  .modal-content {
+    padding: 16px; /* Adjust padding for smaller screens */
+  }
+}
+
+/* Move back link below input for adding new items */
+.shopping-list-container .back-link {
+  margin-top: 20px;
 }

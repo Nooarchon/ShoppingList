@@ -1,5 +1,5 @@
 import React from 'react';
-import './ShoppingListTile.css'; // Import CSS file for styling
+import styles from "../styles/styles.css";
 
 const ShoppingListTile = ({ item, isDetail }) => {
   return (
