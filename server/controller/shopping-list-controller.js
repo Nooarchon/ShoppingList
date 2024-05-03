@@ -1,5 +1,5 @@
 // controller/shopping-list-controller.js
-
+const ShoppingList = require("../models/shopping-list"); // Import mongoose shopping list model
 const express = require("express");
 const router = express.Router();
 const { createShoppingList, getShoppingList, listShoppingList, deleteShoppingList, updateShoppingList } = require("../abl/shopping-list-abl");

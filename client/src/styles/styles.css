@@ -202,8 +202,7 @@ align-items: center;
 }
 
 /* Input Styles */
-input[type="text"],
-input[type="password"] {
+input[type="text"] {
   
   padding: 10px; /* Adjusted padding */
   border: 1px solid #ddd;
@@ -212,6 +211,24 @@ input[type="password"] {
   box-sizing: border-box;
   text-align: center; /* Center the text horizontally */
 }
+
+ input[type="password"] {
+  padding: 10px; /* Adjusted padding */
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  width: 50px; /* Adjusted width */
+  box-sizing: border-box;
+  text-align: center; /* Center the text horizontally */
+}
+
+.modal input[type="password"] {
+  padding: 8px; /* Adjusted padding */
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  width: calc(100% ); /* Adjusted width */
+  box-sizing: border-box;
+}
+
 
 /* Button Styles */
 button {
@@ -264,6 +281,11 @@ button.centered {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Slightly darker shadow */
 }
 
+.dark .modal {
+  background-color: #3b3232; /* Dark mode background color */
+  color: #ffffff; /* Dark mode text color */
+}
+
 /* Dialog Modal */
 .dialog-modal {
   z-index: 1000;
@@ -280,15 +302,6 @@ button.centered {
   justify-content: center;
   align-items: center;
 }
-
-.modal input[type="password"] {
-  padding: 8px; /* Adjusted padding */
-  border: 1px solid #cccccc;
-  border-radius: 4px;
-  width: calc(100% - 20px); /* Adjusted width */
-  box-sizing: border-box;
-}
-
 
 .modal-background {
   position: absolute;
