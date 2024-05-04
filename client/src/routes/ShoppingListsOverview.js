@@ -1,6 +1,7 @@
 // ShoppingListsOverview.js
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { PieChart, Pie, Cell } from 'recharts';
 import addIcon from '../images/add_icon.png';
 import removeIcon from '../images/remove_icon.png';
 import logoutIcon from '../images/logout_icon.png';
@@ -24,6 +25,22 @@ function ShoppingListsOverview({ shoppingLists, setShoppingLists, removeShopping
   const [showModal, setShowModal] = useState(false);
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false); // State to control the visibility of the delete confirmation dialog
   const [deleteListId, setDeleteListId] = useState(null); // State to store the ID of the list to be deleted
+
+  const totalSolvedCount = shoppingLists.reduce((acc, list) => {
+    return acc + list.items.filter(item => item.resolved).length;
+  }, 0);
+  const totalUnsolvedCount = shoppingLists.reduce((acc, list) => {
+    return acc + (list.items.length - list.items.filter(item => item.resolved).length);
+  }, 0);
+
+  // Data for the pie chart
+  const data = [
+    { name: t('solved'), value: totalSolvedCount },
+    { name: t('unsolved'), value: totalUnsolvedCount }
+  ];
+
+  // Colors for the pie chart
+  const COLORS = ['#0088FE', '#FFBB28'];
 
   const handleInputChange = (e) => {
     console.log('New List Name:', e.target.value);
@@ -234,6 +251,8 @@ function ShoppingListsOverview({ shoppingLists, setShoppingLists, removeShopping
           </div>
         </Modal>
       )}
+      
+
       {/* Render the DeleteConfirmationDialog if showDeleteConfirmation is true */}
       {showDeleteConfirmation && (
         <DeleteConfirmationDialog
@@ -241,6 +260,27 @@ function ShoppingListsOverview({ shoppingLists, setShoppingLists, removeShopping
           onClose={() => setShowDeleteConfirmation(false)}
         />
       )}
+
+      <div className="pie-chart-container">
+        <h3>{t('itemStatus')}</h3>
+        <PieChart width={400} height={400}>
+          <Pie
+            data={data}
+            cx="50%"
+            cy="50%"
+            outerRadius={80}
+            fill="#8884d8"
+            dataKey="value"
+            label
+          >
+            {data.map((entry, index) => (
+              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+            ))}
+          </Pie>
+        </PieChart>
+      </div>
+       
+       
     </div>
   );
 }

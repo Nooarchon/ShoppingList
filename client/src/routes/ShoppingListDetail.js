@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next'; // Import useTranslation hook
+import { PieChart, Pie, Cell } from 'recharts';
 import markAsResolvedIcon from '../images/mark_as_resolved_icon.png';
 import removeIcon from '../images/remove_icon.png';
 import addIcon from '../images/add_icon.png';
@@ -9,8 +10,7 @@ import ShoppingListTile from '../utils/ShoppingListTile';
 
 function ShoppingListDetail({ shoppingLists, updateShoppingList, user }) {
   const { id } = useParams();
-  const { t, i18n } = useTranslation(); // Initialize useTranslation hook
-
+  const { t, i18n } = useTranslation();
   const [editedName, setEditedName] = useState('');
   const [newMember, setNewMember] = useState('');
   const [newItemName, setNewItemName] = useState('');
@@ -18,6 +18,19 @@ function ShoppingListDetail({ shoppingLists, updateShoppingList, user }) {
   const [viewMode, setViewMode] = useState('list');
 
   const shoppingList = shoppingLists.find(list => list.id === parseInt(id));
+
+  // Calculate counts of solved and unsolved items
+  const solvedCount = shoppingList.items.filter(item => item.resolved).length;
+  const unsolvedCount = shoppingList.items.length - solvedCount;
+
+  // Data for the pie chart
+  const data = [
+    { name: 'Solved', value: solvedCount },
+    { name: 'Unsolved', value: unsolvedCount }
+  ];
+
+  // Colors for the pie chart
+  const COLORS = ['#0088FE', '#FFBB28'];
 
   if (!user) {
     return <Navigate to="/" />;
@@ -238,6 +251,23 @@ function ShoppingListDetail({ shoppingLists, updateShoppingList, user }) {
       <Link to="/" className="back-link">
         <img src={backIcon} alt={t('backToShoppingListsOverview')} width="20" height="20" /> {/* Use translation for alt text */}
       </Link>
+
+      <PieChart width={400} height={400}>
+        <Pie
+          data={data}
+          cx="50%"
+          cy="50%"
+          innerRadius={60}
+          outerRadius={80}
+          fill="#8884d8"
+          paddingAngle={5}
+          dataKey="value"
+        >
+          {data.map((entry, index) => (
+            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+          ))}
+        </Pie>
+      </PieChart>
     </div>
   );
 

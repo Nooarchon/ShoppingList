@@ -3,6 +3,10 @@
   height: 1000px; /* Use viewport height */
 }
 
+.pie-chart-container{
+  align-items: center;
+}
+
 .mode-toggle {
   /* Styles for the mode toggle button */
   padding: 8px 16px; /* Reduced padding */
