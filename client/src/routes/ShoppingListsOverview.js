@@ -40,7 +40,7 @@ function ShoppingListsOverview({ shoppingLists, setShoppingLists, removeShopping
   ];
 
   // Colors for the pie chart
-  const COLORS = ['#0088FE', '#FFBB28'];
+  const COLORS = ['#00fffc', '#00ffcf'];
 
   const handleInputChange = (e) => {
     console.log('New List Name:', e.target.value);
@@ -138,7 +138,7 @@ function ShoppingListsOverview({ shoppingLists, setShoppingLists, removeShopping
       {user ? (
         <>
           <p>
-            Logged in as: {user.username} ({user.email})
+            {t('loggedInAs')} {user.username} ({user.email})
           </p>
           <button onClick={handleLeaveApp}>
             <img src={logoutIcon} alt="Leave App" width="20" height="20" />
@@ -251,7 +251,7 @@ function ShoppingListsOverview({ shoppingLists, setShoppingLists, removeShopping
           </div>
         </Modal>
       )}
-      
+
 
       {/* Render the DeleteConfirmationDialog if showDeleteConfirmation is true */}
       {showDeleteConfirmation && (
@@ -261,9 +261,9 @@ function ShoppingListsOverview({ shoppingLists, setShoppingLists, removeShopping
         />
       )}
 
+      <h3>{t('itemStatus')}</h3>
       <div className="pie-chart-container">
-        <h3>{t('itemStatus')}</h3>
-        <PieChart width={400} height={400}>
+        <PieChart width={500} height={500}>
           <Pie
             data={data}
             cx="50%"
@@ -279,8 +279,8 @@ function ShoppingListsOverview({ shoppingLists, setShoppingLists, removeShopping
           </Pie>
         </PieChart>
       </div>
-       
-       
+
+
     </div>
   );
 }

@@ -16,5 +16,13 @@
   "leaveList": "Opustit seznam",
   "addItem": "Přidat položku",
   "enterNewItemName": "Zadejte název nové položky",
-  "backToShoppingListsOverview": "Zpět na přehled nákupních seznamů"
+  "backToShoppingListsOverview": "Zpět na přehled nákupních seznamů",
+  "itemStatus":"Stav položek",
+  "createNewShoppingList":"Vytvořit nový nakupní seznam",
+  "showArchivedLists":"Ukazat archivované seznamy",
+  "enterShoppingListName":"Napište nazev seznamu",
+  "loggedInAs":"Přihlašený jako:",
+  "login": "Přihlasit se",
+  "username":"Uživatelské jméno",
+  "password":"Heslo"
 }

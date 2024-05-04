@@ -30,7 +30,7 @@ function ShoppingListDetail({ shoppingLists, updateShoppingList, user }) {
   ];
 
   // Colors for the pie chart
-  const COLORS = ['#0088FE', '#FFBB28'];
+  const COLORS = ['#ff0202', '#5000ff'];
 
   if (!user) {
     return <Navigate to="/" />;
@@ -252,22 +252,23 @@ function ShoppingListDetail({ shoppingLists, updateShoppingList, user }) {
         <img src={backIcon} alt={t('backToShoppingListsOverview')} width="20" height="20" /> {/* Use translation for alt text */}
       </Link>
 
+      <div className="pie-chart-container">
       <PieChart width={400} height={400}>
         <Pie
           data={data}
           cx="50%"
           cy="50%"
-          innerRadius={60}
           outerRadius={80}
           fill="#8884d8"
-          paddingAngle={5}
           dataKey="value"
+          label
         >
           {data.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
           ))}
         </Pie>
       </PieChart>
+      </div>
     </div>
   );
 

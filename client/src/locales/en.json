@@ -16,5 +16,13 @@
   "leaveList": "Leave List",
   "addItem": "Add Item",
   "enterNewItemName": "Enter new item name",
-  "backToShoppingListsOverview": "Back to Shopping Lists Overview"
+  "backToShoppingListsOverview": "Back to Shopping Lists Overview",
+  "itemStatus":"Item status",
+  "createNewShoppingList":"Create new shopping list", 
+  "showArchivedLists":"Show archived lists",
+  "enterShoppingListName":"Enter Shopping list name",
+  "loggedInAs":"Logged in as:",
+  "login": "Login",
+  "username":"Username",
+  "password":"Password"
 }
