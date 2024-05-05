@@ -1,1 +1,7 @@
 do not forget to install recharts and react-i18next
+
+Write in terminal 
+
+npm install recharts 
+
+npm install react-i18next
