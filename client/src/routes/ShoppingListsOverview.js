@@ -12,6 +12,8 @@ import DeleteConfirmationDialog from './DeleteConfirmationDialog'; // Import the
 import { changeLanguage } from '../i18n'; // Import the changeLanguage function
 import { useTranslation } from 'react-i18next'; // Import useTranslation hook
 
+// In terminal write npm install recharts and  npm install react-i18next
+
 function ShoppingListsOverview({ shoppingLists, setShoppingLists, removeShoppingList, user, setUser, language, updateShoppingList }) {
   const { t } = useTranslation(); // Initialize useTranslation hook
 

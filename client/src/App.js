@@ -5,10 +5,11 @@ import { getData, postData, deleteData, updateData } from './calls/Call'; // Imp
 import CreateShoppingList from './modules/CreateShoppingList';
 import ShoppingListsOverview from './routes/ShoppingListsOverview';
 import ShoppingListDetail from './routes/ShoppingListDetail';
-import { changeLanguage } from './i18n'; // Import the changeLanguage function
+import { changeLanguage } from './i18n'; // Import the changeLanguage function 
 import { I18nextProvider, useTranslation } from 'react-i18next'; // Import useTranslation hook
 import './App.css';
 import styles from "./styles/styles.css";
+// In terminal write npm install recharts and  npm install react-i18next
 
 function App() {
   const { t } = useTranslation(); // Initialize useTranslation hook

@@ -8,6 +8,8 @@ import addIcon from '../images/add_icon.png';
 import backIcon from '../images/back_icon.png';
 import ShoppingListTile from '../utils/ShoppingListTile';
 
+// In terminal write npm install recharts and  npm install react-i18next
+
 function ShoppingListDetail({ shoppingLists, updateShoppingList, user }) {
   const { id } = useParams();
   const { t, i18n } = useTranslation();
