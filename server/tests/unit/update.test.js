@@ -1,6 +1,6 @@
 const request = require('supertest');
 const app = require('../../app'); // Adjust the path based on the file structure
-const { request, app, mongoose, ShoppingList } = require('./testSetup');
+const { mongoose, ShoppingList } = require('./testSetup');
 
 describe('PATCH /shoppingList/update/:id', () => {
   test('Should update a shopping list', async () => {
