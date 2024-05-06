@@ -1,4 +1,10 @@
+const request = require('supertest');
+const app = require('../../app');
 const mongoose = require('mongoose');
+const ShoppingList = require('../../models/shoppingList'); // Import your ShoppingList model
+
+module.exports = { request, app, mongoose, ShoppingList };
+
 
 beforeAll(async () => {
   // Connect to the test database
