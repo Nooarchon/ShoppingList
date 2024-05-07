@@ -1,4 +1,25 @@
+const express = require("express");
+const mongoose = require('mongoose');
+require("dotenv").config();
+const cors = require("cors");
+const shoppingListRouter = require("./controller/shopping-list-controller");
+const morgan = require('morgan');
 
+const app = express();
+
+// Middleware
+if (process.env.NODE_ENV === "DEVELOPMENT") {
+    app.use(morgan('dev'));
+}
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cors());
+app.use("/shoppingList", shoppingListRouter);
+
+// Export instance of app
+module.exports = app;
+
+/*
 const express = require("express");
 const app = express();
 const mongoose = require('mongoose');
@@ -35,3 +56,5 @@ app.listen(port, () => {
 });
 
 module.exports = app;
+
+*/
