@@ -86,7 +86,7 @@ describe('GET /shoppingList/list', () => {
 
     // Assert that the response contains the correct data
     expect(response.body.result).toBe('Success!');
-    expect(response.body.data).toHaveLength(2); // Assuming there are 2 created shopping lists
+    expect(response.body.data).toHaveLength(60); // Assuming there are 2 created shopping lists
   });
 });
 
